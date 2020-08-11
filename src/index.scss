@@ -1,0 +1,18 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; /* makes it better to change selector box-sizing */
+}
+
+html {
+  // This defines what 1rem is
+  /* 10px/16px = .625 - this helps user to change overall font-size (for zooming in/out)  */
+  font-size: 62.5%; // 1 rem = 10px; 10px/16px = 62.5%
+}
+
+body {
+  box-sizing: border-box;
+  padding: 3rem;
+}
