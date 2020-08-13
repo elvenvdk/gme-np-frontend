@@ -107,8 +107,6 @@ const Form = ({ hasCheckbox }) => {
     </form>
   );
 
-  console.log(inputData);
-
   return <div className='form'>{renderForm()}</div>;
 };
 
