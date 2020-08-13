@@ -8,13 +8,55 @@
   font-family: $font-main;
   font-size: $font-size-mobile;
 
+  @media screen and (min-width: 48em) {
+    padding: 5rem;
+
+    &-container {
+      & input {
+        margin: 1.5rem 0;
+        height: 3.3rem;
+      }
+    }
+  }
+
+  @media screen and (min-width: 60em) {
+    padding: 12rem;
+  }
+
+  @media screen and (min-width: 65em) {
+    padding: 15rem;
+
+    &-container {
+      & input {
+        margin: 2rem 0;
+        height: 4rem;
+      }
+    }
+  }
+
+  @media screen and (min-width: 70em) {
+    // padding: 20rem;
+
+    &-container {
+      width: 80%;
+      & input {
+        margin: 2.5rem 0;
+        height: 4rem;
+      }
+
+      &-checkbox-group {
+        width: 5rem;
+      }
+    }
+  }
+
   &-container {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 2rem 2rem;
-    margin: 8rem 0 0 0;
+    margin: 2rem auto 0 auto;
 
     &-input {
       position: relative;
@@ -26,10 +68,17 @@
     &-checkbox-group {
       position: relative;
       display: flex;
+      flex-direction: row;
+      justify-content: space-between;
       margin: 2rem auto 5rem 0;
+      height: 3rem;
 
       &-checkbox {
-        margin-right: 1rem;
+        margin: 0 1rem 0 0;
+
+        @media screen and (min-width: 48em) {
+          margin: 0 5rem 0 0;
+        }
       }
     }
   }

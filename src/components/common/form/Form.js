@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 
+import api from '../../../api';
+import { register } from '../../../api/auth';
+
 import './Form.scss';
+
+const inputDefaults = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  role: 'seller',
+};
 
 const Form = ({ hasCheckbox }) => {
   const [inputData, setInputData] = useState({
@@ -8,7 +19,7 @@ const Form = ({ hasCheckbox }) => {
     lastName: '',
     email: '',
     password: '',
-    type: 'seller',
+    role: 'seller',
   });
 
   const handleChange = (e) => {
@@ -21,16 +32,20 @@ const Form = ({ hasCheckbox }) => {
   const handleAdminCheckbox = (e) => {
     setInputData({
       ...inputData,
-      type: e.target.checked ? 'admin' : 'seller',
+      role: e.target.checked ? 'admin' : 'seller',
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(inputData);
+    const response = await register(inputData);
+    if (response?.error) console.log(response?.error);
+    console.log(response);
+    setInputData({ ...inputDefaults });
   };
 
-  const { firstName, lastName, email, password, type } = inputData;
+  const { firstName, lastName, email, password, role } = inputData;
 
   const renderForm = () => (
     <form onSubmit={(e) => handleSubmit(e)} className='form-container'>
@@ -71,10 +86,10 @@ const Form = ({ hasCheckbox }) => {
           <input
             type='checkbox'
             className='form-container-checkbox-group-checkbox'
-            name='isAdmin'
+            name='role'
             onChange={(e) => handleAdminCheckbox(e)}
             id='admin-checkbox'
-            value={type}
+            value={role}
           />
           <label
             className='form-container-checkbox-group-label'
@@ -84,7 +99,11 @@ const Form = ({ hasCheckbox }) => {
           </label>
         </div>
       )}
-      <input type='submit' className='form-container-input submit' />
+      <input
+        type='submit'
+        className='form-container-input submit'
+        value='Register'
+      />
     </form>
   );
 
