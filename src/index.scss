@@ -1,3 +1,5 @@
+@import './utils/variables.scss';
+
 *,
 *::after,
 *::before {
@@ -14,5 +16,6 @@ html {
 
 body {
   box-sizing: border-box;
-  padding: 3rem;
+  // padding: 3rem;
+  font-family: $font-main;
 }
