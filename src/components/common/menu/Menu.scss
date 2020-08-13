@@ -1,0 +1,14 @@
+.menu-list {
+  position: fixed;
+  top: 10rem;
+  left: 5rem;
+  width: 20rem;
+  height: 15rem;
+  z-index: 7;
+  background-color: #ffffff;
+
+  &-item {
+    list-style: none;
+    margin: 2rem auto;
+  }
+}

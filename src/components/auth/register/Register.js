@@ -7,6 +7,7 @@ import './Register.scss';
 export default function register() {
   return (
     <div className='register'>
+      <h1 className='registration-header'>Registration</h1>
       <Form />
     </div>
   );
