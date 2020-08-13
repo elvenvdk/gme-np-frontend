@@ -4,11 +4,13 @@ import Form from '../../common/form/Form';
 
 import './Register.scss';
 
-export default function register() {
+const Register = () => {
   return (
-    <div className='register'>
+    <div className='registration'>
       <h1 className='registration-header'>Registration</h1>
-      <Form />
+      <Form hasCheckbox />
     </div>
   );
-}
+};
+
+export default Register;

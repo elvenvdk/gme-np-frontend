@@ -12,6 +12,8 @@ html {
   // This defines what 1rem is
   /* 10px/16px = .625 - this helps user to change overall font-size (for zooming in/out)  */
   font-size: 62.5%; // 1 rem = 10px; 10px/16px = 62.5%
+  height: 100vh;
+  width: 100vw;
 }
 
 body {

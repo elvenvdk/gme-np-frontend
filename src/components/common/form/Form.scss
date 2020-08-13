@@ -1,0 +1,36 @@
+@import '../../../utils/variables.scss';
+
+.form {
+  position: relative;
+  margin: 0 auto;
+  padding: 2rem;
+  height: inherit;
+  font-family: $font-main;
+  font-size: $font-size-mobile;
+
+  &-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 2rem;
+    margin: 8rem 0 0 0;
+
+    &-input {
+      position: relative;
+      width: 100%;
+      height: 3rem;
+      margin: 1.2rem 0;
+    }
+
+    &-checkbox-group {
+      position: relative;
+      display: flex;
+      margin: 2rem auto 5rem 0;
+
+      &-checkbox {
+        margin-right: 1rem;
+      }
+    }
+  }
+}

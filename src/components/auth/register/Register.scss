@@ -1,0 +1,9 @@
+@import '../../../utils/variables.scss';
+
+.registration {
+  height: 100vh;
+  // padding: 0 6rem;
+  &-header {
+    text-align: center;
+  }
+}
