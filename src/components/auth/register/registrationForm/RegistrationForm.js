@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import api from '../../../api';
-import { register } from '../../../api/auth';
+import api from '../../../../api';
+import { register } from '../../../../api/auth';
 
-import './Form.scss';
+import './RegistrationForm.scss';
 
 const inputDefaults = {
   firstName: '',
