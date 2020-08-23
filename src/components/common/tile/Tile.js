@@ -2,9 +2,9 @@ import React from 'react';
 
 import './Tile.scss';
 
-const Tile = ({ title, data, icon }) => {
+const Tile = ({ title, data, icon, onClick }) => {
   return (
-    <div className='tile'>
+    <div className='tile' onClick={onClick}>
       <h3 className='tile-header'>{title}</h3>
 
       {icon ? (

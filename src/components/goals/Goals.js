@@ -8,7 +8,10 @@ const Goals = () => {
     <div className='goals'>
       <h1 className='goals-header'>Goals</h1>
       <button>PLACEHOLDER SETTINGS BUTTON</button>
-      <div>
+      <div className='goals-tiles'>
+        <Tile title='Sales goal' data='$612.00' />
+        <Tile title='Sales goal' data='$612.00' />
+        <Tile title='Sales goal' data='$612.00' />
         <Tile title='Sales goal' data='$612.00' />
       </div>
     </div>

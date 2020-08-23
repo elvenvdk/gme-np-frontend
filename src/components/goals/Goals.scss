@@ -10,4 +10,11 @@
   &-header {
     text-align: center;
   }
+
+  &-tiles {
+    padding: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
 }
