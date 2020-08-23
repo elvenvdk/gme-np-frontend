@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
-import api from '../../../../api';
-import { register } from '../../../../api/auth';
+import { register, login } from '../../../api/auth';
 
-import './RegistrationForm.scss';
+import './AuthForm.scss';
 
 const inputDefaults = {
   firstName: '',
@@ -13,14 +12,12 @@ const inputDefaults = {
   role: 'seller',
 };
 
-const Form = ({ hasCheckbox }) => {
-  const [inputData, setInputData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    role: 'seller',
-  });
+const Form = ({ hasCheckbox, signup }) => {
+  const [inputData, setInputData] = useState(inputDefaults);
+
+  const { firstName, lastName, email, password, role } = inputData;
+
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleChange = (e) => {
     setInputData({
@@ -38,33 +35,39 @@ const Form = ({ hasCheckbox }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputData);
-    const response = await register(inputData);
-    if (response?.error) console.log(response?.error);
-    console.log(response);
-    setInputData({ ...inputDefaults });
+    if (signup) {
+      const response = await register(inputData);
+      if (response?.error) setErrorMessage(response.error);
+      setInputData({ ...inputDefaults });
+      return;
+    }
+    const response = await login({ email, password });
+    if (response?.error) setErrorMessage(response.error);
   };
-
-  const { firstName, lastName, email, password, role } = inputData;
 
   const renderForm = () => (
     <form onSubmit={(e) => handleSubmit(e)} className='form-container'>
-      <input
-        type='text'
-        className='form-container-input'
-        name='firstName'
-        value={firstName}
-        onChange={(e) => handleChange(e)}
-        placeholder='First Name'
-      />
-      <input
-        type='text'
-        className='form-container-input'
-        name='lastName'
-        value={lastName}
-        onChange={(e) => handleChange(e)}
-        placeholder='Last Name'
-      />
+      {signup && (
+        <>
+          <input
+            type='text'
+            className='form-container-input'
+            name='firstName'
+            value={firstName}
+            onChange={(e) => handleChange(e)}
+            placeholder='First Name'
+          />
+          <input
+            type='text'
+            className='form-container-input'
+            name='lastName'
+            value={lastName}
+            onChange={(e) => handleChange(e)}
+            placeholder='Last Name'
+          />
+        </>
+      )}
+
       <input
         type='email'
         className='form-container-input'
@@ -81,7 +84,7 @@ const Form = ({ hasCheckbox }) => {
         onChange={(e) => handleChange(e)}
         placeholder='Password'
       />
-      {hasCheckbox && (
+      {hasCheckbox && signup && (
         <div className='form-container-checkbox-group'>
           <input
             type='checkbox'
@@ -99,10 +102,13 @@ const Form = ({ hasCheckbox }) => {
           </label>
         </div>
       )}
+      {errorMessage && (
+        <div className='form-container-error'>{errorMessage}</div>
+      )}
       <input
         type='submit'
         className='form-container-input submit'
-        value='Register'
+        value={`${signup ? 'Register' : 'Log in'}`}
       />
     </form>
   );

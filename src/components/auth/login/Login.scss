@@ -1,0 +1,17 @@
+@import '../../../utils/variables.scss';
+
+.login {
+  height: 100vh;
+  // padding: 0 6rem;
+  &-header {
+    position: relative;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 60em) {
+    &-header {
+      font-size: $font-size-header-main;
+      top: 5rem;
+    }
+  }
+}

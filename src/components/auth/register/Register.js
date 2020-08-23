@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Form from './registrationForm/RegistrationForm';
+import AuthForm from '../../common/authForm/AuthForm';
 
 import './Register.scss';
 
@@ -8,7 +8,7 @@ const Register = () => {
   return (
     <div className='registration'>
       <h1 className='registration-header'>Registration</h1>
-      <Form hasCheckbox />
+      <AuthForm hasCheckbox signup />
     </div>
   );
 };
