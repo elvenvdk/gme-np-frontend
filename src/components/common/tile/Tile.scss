@@ -1,0 +1,24 @@
+@import '../../../utils/variables.scss';
+
+.tile {
+  font-family: $font-main;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  border: 0.5px solid #000000;
+  height: 10rem;
+  width: 10rem;
+
+  &-header {
+    text-align: center;
+    margin: auto;
+  }
+
+  &-data {
+    text-align: center;
+    font-size: $font-size-header-main;
+    margin: auto;
+  }
+}
