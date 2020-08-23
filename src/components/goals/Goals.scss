@@ -1,0 +1,13 @@
+@import '../../utils/variables.scss';
+
+.goals {
+  font-family: $font-main;
+  font-weight: $font-size-main;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  &-header {
+    text-align: center;
+  }
+}

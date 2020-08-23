@@ -4,11 +4,20 @@ const API_AUTH_URL = process.env.REACT_APP_API_AUTH_URL;
 
 export const register = async (inputData) => {
   try {
-    const response = await axios.post(`${API_AUTH_URL}/register`, inputData);
-    console.log(response);
-    return response;
+    const res = await axios.post(`${API_AUTH_URL}/register`, inputData);
+    console.log(res);
+    return res;
   } catch (error) {
-    console.log(error);
+    return error.response.data;
+  }
+};
+
+export const login = async (inputData) => {
+  try {
+    const res = await axios.post(`${API_AUTH_URL}/login`, inputData);
+    console.log(res);
+  } catch (error) {
+    return error.response.data;
   }
 };
 
