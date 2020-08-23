@@ -17,4 +17,13 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
   }
+
+  &-chart-icon {
+    height: 5em;
+    width: 5em;
+  }
+
+  .svg-inline--fa.fa-w-16 {
+    width: 5em;
+  }
 }
