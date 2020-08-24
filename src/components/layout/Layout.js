@@ -5,10 +5,11 @@ import Nav from '../common/nav/Nav';
 import Register from '../auth/register/Register';
 import Login from '../auth/login/Login';
 import Goals from '../goals/Goals';
+import GoalSettings from '../goalSettings/GoalSettings';
 
 import './Layout.scss';
 
-export default function Layout() {
+const Layout = () => {
   return (
     <div>
       <Nav />
@@ -17,7 +18,10 @@ export default function Layout() {
         <Route path='/user/login' exact component={Login} />
         <Route path='/user/registration' exact component={Register} />
         <Route path='/sales/goals' exact component={Goals} />
+        <Route path='/sales/goals/settings' exact component={GoalSettings} />
       </Switch>
     </div>
   );
-}
+};
+
+export default Layout;
