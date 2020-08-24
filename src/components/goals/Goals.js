@@ -11,9 +11,9 @@ const Goals = () => {
       <h1 className='goals-header'>Goals</h1>
       <button>PLACEHOLDER SETTINGS BUTTON</button>
       <div className='goals-tiles'>
-        <Tile title='Sales goal' data='$612.00' />
-        <Tile title='Sales goal' data='$612.00' />
-        <Tile title='Sales goal' data='$612.00' />
+        <Tile title='Sales Goal' data='$612.00' />
+        <Tile title='Total Sales' data='$612.00' />
+        <Tile title='Goal Diff' data='$612.00' />
         <Tile title='Sales goal' icon>
           <FontAwesomeIcon
             className='goals-chart-icon'
