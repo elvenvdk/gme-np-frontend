@@ -11,7 +11,7 @@ const Goals = () => {
   return (
     <div className='goals'>
       <h1 className='goals-header'>Goals</h1>
-      <Link to='/sales-goal/settings'>
+      <Link className='goals-settings-link' to='/sales-goal/settings'>
         <Button>Settings</Button>
       </Link>
       <div className='goals-tiles'>
