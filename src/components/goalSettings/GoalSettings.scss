@@ -1,0 +1,46 @@
+@import '../../utils/variables.scss';
+
+.goalsettings {
+  font-family: $font-main;
+  font-weight: $font-size-main;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  &-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &-tiles {
+    padding: 4rem 0;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+    &-input {
+      margin: 0.5rem auto 0 auto;
+      height: 3rem;
+      width: 12rem;
+      text-align: center;
+      font-size: $font-size-main;
+    }
+
+    &-input-btn {
+      margin: 0.5rem auto 0 auto;
+      height: 3rem;
+      width: 12rem;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+  }
+
+  &-chart-icon {
+    height: 5em;
+    width: 5em;
+  }
+
+  .svg-inline--fa.fa-w-16 {
+    width: 5em;
+  }
+}
