@@ -3,17 +3,19 @@ import { setGlobal } from 'reactn';
 
 const API_URL = process.env.REACT_APP_API_AUTH_URL;
 
-export const setStorage = ({ userId, role, orgId, token }) => {
+export const setStorage = ({ userId, role, orgId, orgName, token }) => {
   if (userId) localStorage.setItem('userId', JSON.stringify(userId));
   if (role) localStorage.setItem('role', JSON.stringify(role));
   if (orgId) localStorage.setItem('orgId', JSON.stringify(orgId));
+  if (orgName) localStorage.setItem('orgName', JSON.stringify(orgName));
   if (token) localStorage.setItem('token', JSON.stringify(token));
 };
 
-export const getStorage = ({ userId, role, orgId, token }) => {
+export const getStorage = ({ userId, role, orgId, orgName, token }) => {
   if (userId) return JSON.parse(localStorage.getItem('userId'));
   if (role) return JSON.parse(localStorage.getItem('role'));
   if (orgId) return JSON.parse(localStorage.getItem('orgId'));
+  if (orgName) return JSON.parse(localStorage.getItem('orgName'));
   if (token) return JSON.parse(localStorage.getItem('token'));
 };
 
@@ -21,6 +23,7 @@ export const removeStorage = () => {
   localStorage.removeItem('userId');
   localStorage.removeItem('role');
   localStorage.removeItem('orgId');
+  localStorage.removeItem('orgName');
   localStorage.removeItem('userId');
 };
 
