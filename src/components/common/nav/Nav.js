@@ -10,7 +10,7 @@ const Nav = () => {
   return (
     <div className='nav'>
       <Menu />
-      <h4 className='nav-company-name'>Grandma Emma's Non-Profit</h4>
+      <h4 className='nav-company-name'>Grandma Emma's Fund Raising</h4>
       <FontAwesomeIcon className='nav-user-icon' icon={faUser} />
     </div>
   );

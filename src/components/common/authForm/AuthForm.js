@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { register, login } from '../../../api/auth';
 
@@ -13,11 +14,14 @@ const inputDefaults = {
 };
 
 const Form = ({ hasCheckbox, signup }) => {
+  const history = useHistory();
   const [inputData, setInputData] = useState(inputDefaults);
 
   const { firstName, lastName, email, password, role } = inputData;
 
   const [errorMessage, setErrorMessage] = useState(null);
+  const [confirmationMessage, setConfirmationMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setInputData({
@@ -33,12 +37,26 @@ const Form = ({ hasCheckbox, signup }) => {
     });
   };
 
+  const handleOwnerCheckbox = (e) => {
+    setInputData({
+      ...inputData,
+      role: e.target.checked && 'owner',
+    });
+  };
+
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     if (signup) {
       const response = await register(inputData);
-      if (response?.error) setErrorMessage(response.error);
+      console.log(response);
+      if (response?.error) {
+        setErrorMessage(response.error);
+        setLoading(false);
+      }
       setInputData({ ...inputDefaults });
+      setConfirmationMessage(response.msg);
+      setLoading(false);
       return;
     }
     const response = await login({ email, password });
@@ -100,6 +118,21 @@ const Form = ({ hasCheckbox, signup }) => {
           >
             Admin
           </label>
+
+          <input
+            type='checkbox'
+            className='form-container-checkbox-group-checkbox'
+            name='role'
+            onChange={(e) => handleOwnerCheckbox(e)}
+            id='admin-checkbox'
+            value={role}
+          />
+          <label
+            className='form-container-checkbox-group-label'
+            htmlFor='admin-checkbox'
+          >
+            Owner
+          </label>
         </div>
       )}
       {errorMessage && (
@@ -110,10 +143,30 @@ const Form = ({ hasCheckbox, signup }) => {
         className='form-container-input submit'
         value={`${signup ? 'Register' : 'Log in'}`}
       />
+      {!signup ? <p>Not registered yet?</p> : <p>Already registered?</p>}
+      <input
+        type='submit'
+        className='form-container-input register-btn'
+        value={`${!signup ? 'Register' : 'Log in'}`}
+        onClick={() =>
+          history.push(`${!signup ? '/user/registration' : '/user/login'}`)
+        }
+      />
     </form>
   );
 
-  return <div className='form'>{renderForm()}</div>;
+  return (
+    <div className='form'>
+      {renderForm()}
+      {confirmationMessage ? (
+        <p>{confirmationMessage}</p>
+      ) : errorMessage ? (
+        <p>{errorMessage}</p>
+      ) : (
+        <></>
+      )}
+    </div>
+  );
 };
 
 export default Form;

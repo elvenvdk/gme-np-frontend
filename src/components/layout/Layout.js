@@ -6,6 +6,7 @@ import Register from '../auth/register/Register';
 import Login from '../auth/login/Login';
 import Goals from '../goals/Goals';
 import GoalSettings from '../goalSettings/GoalSettings';
+import EmailVerificationCheck from '../auth/emailVerificationCheck/EmailVerificationCheck';
 
 import './Layout.scss';
 
@@ -19,6 +20,11 @@ const Layout = () => {
         <Route path='/user/registration' exact component={Register} />
         <Route path='/sales/goals' exact component={Goals} />
         <Route path='/sales/goals/settings' exact component={GoalSettings} />
+        <Route
+          path='/registration-email-verification/:token'
+          exact
+          component={EmailVerificationCheck}
+        />
       </Switch>
     </div>
   );
