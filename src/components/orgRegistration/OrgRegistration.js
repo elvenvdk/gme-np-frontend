@@ -14,7 +14,7 @@ const OrgRegistration = () => {
   const [loading, setLoading] = useState(false);
   const [orgData, setOrgData] = useState({
     name: '',
-    owner: null,
+    owner: '',
     addressLine1: '',
     addressLine2: '',
     city: '',
@@ -66,15 +66,14 @@ const OrgRegistration = () => {
     const formData = new FormData(orgForm);
     try {
       const res = await addOrg(formData);
-      console.log({ res });
       setMessage({
         ...message,
-        confirmation: res.message,
+        confirmation: res.msg,
       });
       setOrgData({
         ...orgData,
         name: '',
-        owner: null,
+        owner: '',
         addressLine1: '',
         addressLine2: '',
         city: '',
@@ -99,6 +98,13 @@ const OrgRegistration = () => {
         id='org-registration-form'
         onSubmit={(e) => handleSubmit(e)}
       >
+        <input
+          type='text'
+          hidden
+          defaultValue={owner}
+          name='owner'
+          id='owner'
+        />
         <label htmlFor='name' className='org-registration-form-label'>
           Name
         </label>
@@ -195,7 +201,11 @@ const OrgRegistration = () => {
           value='Register'
         />
       </form>
-      {message?.confirmation && <p>{message?.confirmation}</p>}
+      {message?.confirmation && (
+        <p className='org-registration-form-confirmation'>
+          {message?.confirmation}
+        </p>
+      )}
       {message?.error && <p>{message?.error}</p>}
     </div>
   );
