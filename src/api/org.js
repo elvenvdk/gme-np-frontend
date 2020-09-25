@@ -5,32 +5,9 @@ import { setStorage } from './auth';
 
 const API_URL = process.env.REACT_APP_API_AUTH_URL;
 
-export const addOrg = async (
-  name,
-  owner,
-  addressLine1,
-  addressLine2,
-  city,
-  state,
-  zipCode,
-  photo,
-) => {
-  console.log('FROM FRONTEND API', {
-    name,
-    owner,
-    addressLine1,
-    addressLine2,
-    city,
-    state,
-    zipCode,
-    photo,
-  });
+export const addOrg = async (orgForm) => {
   try {
-    const res = await axios.post(
-      `http://localhost:8003/api/org/add`,
-      (name, owner, addressLine1, addressLine2, city, state, zipCode, photo),
-    );
-    console.log({ res: res.data });
+    const res = await axios.post(`${API_URL}/org/add`, orgForm);
     setStorage({ orgId: res.data.orgId, orgToken: res.data.orgToken });
     return res.data;
   } catch (error) {

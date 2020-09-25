@@ -62,27 +62,10 @@ const OrgRegistration = () => {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
+    const orgForm = document.getElementById('org-registration-form');
+    const formData = new FormData(orgForm);
     try {
-      const res = await addOrg({
-        name: orgData.name,
-        owner: orgData.owner,
-        addressLine1: orgData.addressLine1,
-        addressLine2: orgData.addressLine2,
-        city: orgData.city,
-        state: orgData.state,
-        zipCode: orgData.zipCode,
-        photo: orgData.photo,
-      });
-      console.log('FROM ORG FORM', {
-        name: orgData.name,
-        owner: orgData.owner,
-        addressLine1: orgData.addressLine1,
-        addressLine2: orgData.addressLine2,
-        city: orgData.city,
-        state: orgData.state,
-        zipCode: orgData.zipCode,
-        photo: orgData.photo,
-      });
+      const res = await addOrg(formData);
       console.log({ res });
       setMessage({
         ...message,
@@ -111,7 +94,11 @@ const OrgRegistration = () => {
 
   return (
     <div className='org-registration'>
-      <form className='org-registration-form' onSubmit={(e) => handleSubmit(e)}>
+      <form
+        className='org-registration-form'
+        id='org-registration-form'
+        onSubmit={(e) => handleSubmit(e)}
+      >
         <label htmlFor='name' className='org-registration-form-label'>
           Name
         </label>
