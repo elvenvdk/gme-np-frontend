@@ -64,18 +64,40 @@ const OrgRegistration = () => {
     e.preventDefault();
     try {
       const res = await addOrg({
-        name,
-        owner,
-        addressLine1,
-        addressLine2,
-        city,
-        state,
-        zipCode,
-        photo,
+        name: orgData.name,
+        owner: orgData.owner,
+        addressLine1: orgData.addressLine1,
+        addressLine2: orgData.addressLine2,
+        city: orgData.city,
+        state: orgData.state,
+        zipCode: orgData.zipCode,
+        photo: orgData.photo,
       });
+      console.log('FROM ORG FORM', {
+        name: orgData.name,
+        owner: orgData.owner,
+        addressLine1: orgData.addressLine1,
+        addressLine2: orgData.addressLine2,
+        city: orgData.city,
+        state: orgData.state,
+        zipCode: orgData.zipCode,
+        photo: orgData.photo,
+      });
+      console.log({ res });
       setMessage({
         ...message,
         confirmation: res.message,
+      });
+      setOrgData({
+        ...orgData,
+        name: '',
+        owner: null,
+        addressLine1: '',
+        addressLine2: '',
+        city: '',
+        state: '',
+        zipCode: '',
+        photo: null,
       });
       setLoading(false);
     } catch (error) {
@@ -89,7 +111,7 @@ const OrgRegistration = () => {
 
   return (
     <div className='org-registration'>
-      <form className='org-registration-form' onSubmit={handleSubmit}>
+      <form className='org-registration-form' onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor='name' className='org-registration-form-label'>
           Name
         </label>
@@ -180,7 +202,14 @@ const OrgRegistration = () => {
         />
 
         {photo && <img src={photo} className='org-registration-form-image' />}
+        <input
+          type='submit'
+          className='org-registration-form-input'
+          value='Register'
+        />
       </form>
+      {message?.confirmation && <p>{message?.confirmation}</p>}
+      {message?.error && <p>{message?.error}</p>}
     </div>
   );
 };

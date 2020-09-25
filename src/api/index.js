@@ -1,5 +1,23 @@
-import { register } from './auth';
+import {
+  emailVerificationCheck,
+  register,
+  login,
+  logout,
+  forgotPassword,
+  forgotPasswordVerification,
+} from './auth';
 
-const api = { ...register };
+import { addOrg, updateOrg } from './org';
+
+const api = {
+  ...emailVerificationCheck,
+  ...register,
+  ...login,
+  ...logout,
+  ...forgotPassword,
+  ...forgotPasswordVerification,
+  ...addOrg,
+  ...updateOrg,
+};
 
 export default api;

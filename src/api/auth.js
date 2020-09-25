@@ -3,12 +3,20 @@ import { setGlobal } from 'reactn';
 
 const API_URL = process.env.REACT_APP_API_AUTH_URL;
 
-export const setStorage = ({ userId, role, orgId, orgName, token }) => {
+export const setStorage = ({
+  userId,
+  role,
+  orgId,
+  orgName,
+  token,
+  orgToken,
+}) => {
   if (userId) localStorage.setItem('userId', JSON.stringify(userId));
   if (role) localStorage.setItem('role', JSON.stringify(role));
   if (orgId) localStorage.setItem('orgId', JSON.stringify(orgId));
   if (orgName) localStorage.setItem('orgName', JSON.stringify(orgName));
   if (token) localStorage.setItem('token', JSON.stringify(token));
+  if (orgToken) localStorage.setItem('orgToken', JSON.stringify(orgToken));
 };
 
 export const getStorage = ({ userId, role, orgId, orgName, token }) => {
