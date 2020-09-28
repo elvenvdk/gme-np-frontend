@@ -14,7 +14,7 @@ const OrgRegistration = () => {
   const [loading, setLoading] = useState(false);
   const [orgData, setOrgData] = useState({
     name: '',
-    owner: '',
+    owner: null,
     addressLine1: '',
     addressLine2: '',
     city: '',
@@ -73,7 +73,7 @@ const OrgRegistration = () => {
       setOrgData({
         ...orgData,
         name: '',
-        owner: '',
+        owner: null,
         addressLine1: '',
         addressLine2: '',
         city: '',
@@ -101,7 +101,7 @@ const OrgRegistration = () => {
         <input
           type='text'
           hidden
-          defaultValue={owner}
+          defaultValue={owner !== null ? '' : owner}
           name='owner'
           id='owner'
         />

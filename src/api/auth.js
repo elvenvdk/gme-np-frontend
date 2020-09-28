@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { setGlobal } from 'reactn';
+import { roleTypes } from './helpers';
 
 const API_URL = process.env.REACT_APP_API_AUTH_URL;
 
@@ -19,12 +20,12 @@ export const setStorage = ({
   if (orgToken) localStorage.setItem('orgToken', JSON.stringify(orgToken));
 };
 
-export const getStorage = ({ userId, role, orgId, orgName, token }) => {
-  if (userId) return JSON.parse(localStorage.getItem('userId'));
-  if (role) return JSON.parse(localStorage.getItem('role'));
-  if (orgId) return JSON.parse(localStorage.getItem('orgId'));
-  if (orgName) return JSON.parse(localStorage.getItem('orgName'));
-  if (token) return JSON.parse(localStorage.getItem('token'));
+export const getStorage = {
+  userId: () => JSON.parse(localStorage.getItem('userId')),
+  role: () => JSON.parse(localStorage.getItem('role')),
+  orgId: () => JSON.parse(localStorage.getItem('orgId')),
+  orgName: () => JSON.parse(localStorage.getItem('orgName')),
+  token: () => JSON.parse(localStorage.getItem('token')),
 };
 
 export const removeStorage = () => {
@@ -56,7 +57,7 @@ export const register = async ({
       role,
       org,
     });
-    console.log({ registerationResponse: res.data });
+    // console.log({ registerationResponse: res.data });
     return res.data;
   } catch (error) {
     return error.response.data;
@@ -64,9 +65,28 @@ export const register = async ({
 };
 
 export const login = async ({ email, password }) => {
+  console.log({ email, password });
   try {
     const res = await axios.post(`${API_URL}/auth/login`, { email, password });
-    // console.log({ loginResponse: res.data });
+    if (res?.data.role === roleTypes.SELLER)
+      return {
+        error:
+          'Sellers cannot use this application.  Please log in to the Fund-Raiser Sales App.',
+      };
+    setStorage({
+      userId: res.data.id,
+      role: res.data.role,
+      token: res.data.token,
+      orgId: res.data.orgId,
+      orgToken: res.data.orgToken,
+    });
+    setGlobal({
+      userId: res.data.id,
+      role: res.data.role,
+      token: res.data.token,
+      orgId: res.data.orgId,
+      orgToken: res.data.orgToken,
+    });
     return res.data;
   } catch (error) {
     return error.response.data;
@@ -82,15 +102,18 @@ export const emailVerificationCheck = async (token) => {
     const res = await axios.post(
       `${API_URL}/auth/email-verification?token=${token}`,
     );
-    setStorage({
-      userId: res.data.id,
-      role: res.data.role,
-      token: res.data.token,
-    });
-    setGlobal({
-      userId: res.data.id,
-      role: res.data.rol,
-    });
+
+    if (res.data.role !== roleTypes.SELLER) {
+      setStorage({
+        userId: res.data.id,
+        role: res.data.role,
+        token: res.data.token,
+      });
+      setGlobal({
+        userId: res.data.id,
+        role: res.data.rol,
+      });
+    }
 
     return res.data;
   } catch (error) {

@@ -11,13 +11,14 @@ const inputDefaults = {
   email: '',
   password: '',
   role: 'seller',
+  orgName: '',
 };
 
 const Form = ({ hasCheckbox, signup }) => {
   const history = useHistory();
   const [inputData, setInputData] = useState(inputDefaults);
 
-  const { firstName, lastName, email, password, role } = inputData;
+  const { firstName, lastName, email, password, role, orgName } = inputData;
 
   const [errorMessage, setErrorMessage] = useState(null);
   const [confirmationMessage, setConfirmationMessage] = useState(null);
@@ -59,7 +60,7 @@ const Form = ({ hasCheckbox, signup }) => {
       setLoading(false);
       return;
     }
-    const response = await login({ email, password });
+    const response = await login(inputData);
     if (response?.error) setErrorMessage(response.error);
   };
 
@@ -82,6 +83,15 @@ const Form = ({ hasCheckbox, signup }) => {
             value={lastName}
             onChange={(e) => handleChange(e)}
             placeholder='Last Name'
+          />
+
+          <input
+            type='text'
+            className='form-container-input'
+            name='orgName'
+            value={orgName}
+            onChange={(e) => handleChange(e)}
+            placeholder='Organization name'
           />
         </>
       )}

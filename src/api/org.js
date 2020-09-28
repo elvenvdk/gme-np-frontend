@@ -1,13 +1,16 @@
 import axios from 'axios';
 import { setGlobal } from 'reactn';
 
-import { setStorage } from './auth';
+import { setStorage, getStorage } from './auth';
 
 const API_URL = process.env.REACT_APP_API_AUTH_URL;
 
 export const addOrg = async (orgForm) => {
   try {
-    const res = await axios.post(`${API_URL}/org/add`, orgForm);
+    const res = await axios.post(
+      `${API_URL}/org/add?userId=${getStorage.userId()}`,
+      orgForm,
+    );
     setStorage({ orgId: res.data.orgId, orgToken: res.data.orgToken });
     return res.data;
   } catch (error) {
