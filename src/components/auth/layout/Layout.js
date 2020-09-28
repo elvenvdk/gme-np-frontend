@@ -5,6 +5,7 @@ import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
 import Register from '../register/Register';
 import Login from '../login/Login';
 import EmailVerificationCheck from '../emailVerificationCheck/EmailVerificationCheck';
+import api from '../../../api';
 
 import './Layout.scss';
 

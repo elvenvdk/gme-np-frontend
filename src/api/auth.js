@@ -145,3 +145,15 @@ export const forgotPasswordVerification = async (token) => {
     return error.response.data;
   }
 };
+
+export default {
+  setStorage,
+  getStorage,
+  removeStorage,
+  register,
+  login,
+  logout,
+  emailVerificationCheck,
+  forgotPassword,
+  forgotPasswordVerification,
+};

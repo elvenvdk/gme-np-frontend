@@ -1,16 +1,21 @@
-import React from 'react';
-import { getGlobal } from 'reactn';
+import React, { useEffect, useState } from 'react';
+import { getGlobal, setGlobal } from 'reactn';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import PrivateRoute from './components/auth/privateRoute/PrivateRoute';
 import Layout from './components/layout/Layout';
 import AuthLayout from './components/auth/layout/Layout';
+import api from './api';
 
 const App = () => {
-  const { userId } = getGlobal();
+  const [userId, setUserId] = useState(null);
+  useEffect(() => {
+    setUserId(api.getStorage.userId());
+    setGlobal({ userId: api.getStorage.userId() });
+  }, [api.getStorage.userId(), setUserId]);
 
-  if (userId) {
-  }
+  console.log('FROM GET STORAGE...', api.getStorage.userId());
+
   return (
     <div className='App'>
       <Switch>

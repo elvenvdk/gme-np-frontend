@@ -45,3 +45,8 @@ export const updateOrg = async ({
     return error.data.response;
   }
 };
+
+export default {
+  addOrg,
+  updateOrg,
+};
