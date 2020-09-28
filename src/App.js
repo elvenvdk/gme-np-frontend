@@ -1,18 +1,34 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { getGlobal } from 'reactn';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
+import PrivateRoute from './components/auth/privateRoute/PrivateRoute';
 import Layout from './components/layout/Layout';
-import Register from './components/auth/register/Register';
-import Login from './components/auth/login/Login';
+import AuthLayout from './components/auth/layout/Layout';
 
-function App() {
+const App = () => {
+  const { userId } = getGlobal();
+
+  if (userId) {
+  }
   return (
     <div className='App'>
       <Switch>
-        <Route path='/' component={Layout} />
+        <Route
+          path='/'
+          exact
+          component={() => {
+            if (userId) {
+              return <Redirect to='/sales/goals' />;
+            }
+            return <Redirect to='/user/login' />;
+          }}
+        />
+        <Route path='/user/login' component={AuthLayout} />
+        <PrivateRoute path='/sales' component={Layout} />
       </Switch>
     </div>
   );
-}
+};
 
 export default App;

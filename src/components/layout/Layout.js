@@ -17,15 +17,9 @@ const Layout = () => {
       <Nav />
       <Switch>
         {/* <Route path='/' exact component={Login} /> */}
-        <Route path='/user/login' exact component={Login} />
-        <Route path='/user/registration' exact component={Register} />
+
         <Route path='/sales/goals' exact component={Goals} />
         <Route path='/sales/goals/settings' exact component={GoalSettings} />
-        <Route
-          path='/registration-email-verification/:token'
-          exact
-          component={EmailVerificationCheck}
-        />
         <Route path='/org/registration' exact component={OrgRegistration} />
       </Switch>
     </div>
