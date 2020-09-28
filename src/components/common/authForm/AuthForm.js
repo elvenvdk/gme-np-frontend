@@ -61,7 +61,14 @@ const Form = ({ hasCheckbox, signup }) => {
       return;
     }
     const response = await login(inputData);
-    if (response?.error) setErrorMessage(response.error);
+    if (response?.error) {
+      setErrorMessage(response.error);
+      setLoading(false);
+      return;
+    }
+    setConfirmationMessage(response.msg);
+    setLoading(false);
+    setInputData({ ...inputDefaults });
   };
 
   const renderForm = () => (

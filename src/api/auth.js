@@ -79,6 +79,7 @@ export const login = async ({ email, password }) => {
       token: res.data.token,
       orgId: res.data.orgId,
       orgToken: res.data.orgToken,
+      orgName: res.data.orgName,
     });
     setGlobal({
       userId: res.data.id,
@@ -86,6 +87,7 @@ export const login = async ({ email, password }) => {
       token: res.data.token,
       orgId: res.data.orgId,
       orgToken: res.data.orgToken,
+      orgName: res.data.orgName,
     });
     return res.data;
   } catch (error) {
