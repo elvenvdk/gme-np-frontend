@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { register, login } from '../../../api/auth';
+import api from '../../../api';
 
 import './AuthForm.scss';
 
@@ -17,12 +17,17 @@ const inputDefaults = {
 const Form = ({ hasCheckbox, signup }) => {
   const history = useHistory();
   const [inputData, setInputData] = useState(inputDefaults);
+  const [orgId, setOrgId] = useState(null);
 
   const { firstName, lastName, email, password, role, orgName } = inputData;
 
   const [errorMessage, setErrorMessage] = useState(null);
   const [confirmationMessage, setConfirmationMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setOrgId(api.getStorage.orgId());
+  }, []);
 
   const handleChange = (e) => {
     setInputData({
@@ -49,7 +54,7 @@ const Form = ({ hasCheckbox, signup }) => {
     setLoading(true);
     e.preventDefault();
     if (signup) {
-      const response = await register(inputData);
+      const response = await api.register(inputData);
       console.log(response);
       if (response?.error) {
         setErrorMessage(response.error);
@@ -60,7 +65,7 @@ const Form = ({ hasCheckbox, signup }) => {
       setLoading(false);
       return;
     }
-    const response = await login(inputData);
+    const response = await api.login(inputData);
     if (response?.error) {
       setErrorMessage(response.error);
       setLoading(false);
@@ -92,14 +97,16 @@ const Form = ({ hasCheckbox, signup }) => {
             placeholder='Last Name'
           />
 
-          <input
-            type='text'
-            className='form-container-input'
-            name='orgName'
-            value={orgName}
-            onChange={(e) => handleChange(e)}
-            placeholder='Organization name'
-          />
+          {orgId && (
+            <input
+              type='text'
+              className='form-container-input'
+              name='orgName'
+              value={orgName}
+              onChange={(e) => handleChange(e)}
+              placeholder='Organization name'
+            />
+          )}
         </>
       )}
 
@@ -166,7 +173,7 @@ const Form = ({ hasCheckbox, signup }) => {
         className='form-container-input register-btn'
         value={`${!signup ? 'Register' : 'Log in'}`}
         onClick={() =>
-          history.push(`${!signup ? '/user/registration' : '/user/login'}`)
+          history.push(`${!signup ? '/auth/registration' : '/auth/login'}`)
         }
       />
     </form>

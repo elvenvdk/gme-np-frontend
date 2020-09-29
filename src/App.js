@@ -14,8 +14,6 @@ const App = () => {
     setGlobal({ userId: api.getStorage.userId() });
   }, [api.getStorage.userId(), setUserId]);
 
-  console.log('FROM GET STORAGE...', api.getStorage.userId());
-
   return (
     <div className='App'>
       <Switch>
@@ -26,10 +24,10 @@ const App = () => {
             if (userId) {
               return <Redirect to='/sales/goals' />;
             }
-            return <Redirect to='/user/login' />;
+            return <Redirect to='/auth/login' />;
           }}
         />
-        <Route path='/user/login' component={AuthLayout} />
+        <Route path='/auth' component={AuthLayout} />
         <PrivateRoute path='/sales' component={Layout} />
       </Switch>
     </div>

@@ -1,6 +1,9 @@
 @import '../../utils/variables.scss';
 
 .org-registration {
+  &-title {
+    text-align: center;
+  }
   &-form {
     position: relative;
     margin: 0 auto;
@@ -50,6 +53,17 @@
     &-image {
       height: 10rem;
       width: 10rem;
+    }
+
+    &-confirmation {
+      text-align: center;
+      font-size: $font-size-mobile;
+    }
+
+    &-error {
+      text-align: center;
+      font-size: $font-size-mobile;
+      color: red;
     }
   }
 }

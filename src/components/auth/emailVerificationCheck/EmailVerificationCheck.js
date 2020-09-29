@@ -37,7 +37,9 @@ const EmailVerificationCheck = ({ match }) => {
     <div>
       {message.confirmation && <p>{message.confirmation}</p>}
       {message.error && <p>{message.error}</p>}
-      {message.confirmation && <Redirect to='/org/registration' />}
+      {message.confirmation && (
+        <Redirect to='/sales/organization-registration' />
+      )}
     </div>
   );
 };

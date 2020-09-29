@@ -25,13 +25,26 @@ const Layout = () => {
     );
   }
 
+  if (orgId) {
+    return (
+      <Redirect
+        to={
+          location.state?.from?.pathName + location.state?.from?.search ||
+          '/sales/goals'
+        }
+      />
+    );
+  }
+
+  console.log(location.state?.from?.pathName + location.state?.from?.search);
+
   return (
     <div className='auth-layout'>
       <Switch>
-        <Route path='/user/login' exact component={Login} />
-        <Route path='/user/registration' exact component={Register} />
+        <Route path='/auth/registration' exact component={Register} />
+        <Route path='/auth/login' exact component={Login} />
         <Route
-          path='/registration-email-verification/:token'
+          path='/auth/registration-email-verification/:token'
           exact
           component={EmailVerificationCheck}
         />

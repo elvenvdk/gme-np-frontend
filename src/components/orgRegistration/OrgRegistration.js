@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useGlobal } from 'reactn';
-
-import { addOrg } from '../../api/org';
+import { useHistory, Redirect } from 'react-router-dom';
+import api from '../../api';
 
 import './OrgRegistration.scss';
 
 const OrgRegistration = () => {
+  const history = useHistory();
   const [userId] = useGlobal('userId');
   const [message, setMessage] = useState({
     error: null,
@@ -22,6 +23,7 @@ const OrgRegistration = () => {
     zipCode: '',
     photo: null,
   });
+  const [_orgId, _setOrgId] = useState(null);
 
   const {
     name,
@@ -34,14 +36,13 @@ const OrgRegistration = () => {
     photo,
   } = orgData;
 
-  console.log({ userId });
-
   useEffect(() => {
+    _setOrgId(api.getStorage.orgId());
     setOrgData({
       ...orgData,
       owner: userId,
     });
-  }, []);
+  }, [api.getStorage.orgId(), _setOrgId]);
 
   const handleInputChange = (e) => {
     e.preventDefault();
@@ -65,7 +66,7 @@ const OrgRegistration = () => {
     const orgForm = document.getElementById('org-registration-form');
     const formData = new FormData(orgForm);
     try {
-      const res = await addOrg(formData);
+      const res = await api.addOrg(formData);
       setMessage({
         ...message,
         confirmation: res.msg,
@@ -82,6 +83,7 @@ const OrgRegistration = () => {
         photo: null,
       });
       setLoading(false);
+      return <Redirect to='/sales/goals' />;
     } catch (error) {
       setLoading(false);
       setMessage({
@@ -93,6 +95,7 @@ const OrgRegistration = () => {
 
   return (
     <div className='org-registration'>
+      <h2 className='org-registration-title'>Fund Drive Registration</h2>
       <form
         className='org-registration-form'
         id='org-registration-form'

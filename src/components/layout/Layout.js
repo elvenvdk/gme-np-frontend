@@ -1,26 +1,33 @@
-import React, { useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
-
+import React, { useEffect, useState } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Nav from '../common/nav/Nav';
-import Register from '../auth/register/Register';
-import Login from '../auth/login/Login';
 import Goals from '../goals/Goals';
 import GoalSettings from '../goalSettings/GoalSettings';
-import EmailVerificationCheck from '../auth/emailVerificationCheck/EmailVerificationCheck';
 import OrgRegistration from '../orgRegistration/OrgRegistration';
-
+import api from '../../api';
 import './Layout.scss';
 
 const Layout = () => {
+  const [orgId, setOrgId] = useState(null);
+
+  useEffect(() => {
+    setOrgId(api.getStorage.orgId());
+  }, [api.getStorage.orgId(), setOrgId]);
+
+  // if (!orgId) return <Redirect to='/org/registration' />;
+  // if (orgId) return <Redirect to='/sales/organization-registration' />;
+
   return (
     <div>
       <Nav />
       <Switch>
-        {/* <Route path='/' exact component={Login} /> */}
-
         <Route path='/sales/goals' exact component={Goals} />
-        <Route path='/sales/goals/settings' exact component={GoalSettings} />
-        <Route path='/org/registration' exact component={OrgRegistration} />
+        <Route path='/sales/goal-settings' exact component={GoalSettings} />
+        <Route
+          path='/sales/organization-registration'
+          exact
+          component={OrgRegistration}
+        />
       </Switch>
     </div>
   );

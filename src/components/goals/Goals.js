@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useGlobal } from 'reactn';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartBar } from '@fortawesome/free-solid-svg-icons';
 import { formatCurrency } from '../../helpers/Helpers';
+
+import api from '../../api';
 
 import Tile from '../common/tile/Tile';
 import Button from '../common/button/Button';
@@ -17,12 +19,13 @@ const Goals = () => {
     set_Goals(goals);
   }, []);
 
-  // if (!_goals) return <p>Loading your goals...</p>;
+  if (!api.getStorage.orgId())
+    return <Redirect to='/sales/organization-registration' />;
 
   return (
     <div className='goals'>
       <h1 className='goals-header'>Goals</h1>
-      <Link className='goals-settings-link' to='/sales/goals/settings'>
+      <Link className='goals-settings-link' to='/sales/goal-settings'>
         <Button>Settings</Button>
       </Link>
       <div className='goals-tiles'>

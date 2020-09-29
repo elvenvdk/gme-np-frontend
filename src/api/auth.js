@@ -2,7 +2,7 @@ import axios from 'axios';
 import { setGlobal } from 'reactn';
 import { roleTypes } from './helpers';
 
-const API_URL = process.env.REACT_APP_API_AUTH_URL;
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const setStorage = ({
   userId,

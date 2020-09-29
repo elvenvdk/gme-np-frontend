@@ -3,7 +3,7 @@ import { setGlobal } from 'reactn';
 
 import { setStorage, getStorage } from './auth';
 
-const API_URL = process.env.REACT_APP_API_AUTH_URL;
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const addOrg = async (orgForm) => {
   try {
