@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { setGlobal } from 'reactn';
 
 import Tile from '../common/tile/Tile';
 import { formatCurrency } from '../../helpers/Helpers';
+import api from '../../api';
 
 import './GoalSettings.scss';
 
@@ -21,9 +22,20 @@ const GoalSettings = () => {
     });
   };
 
-  const handleSubmitSalesGoal = () => {
+  const handleSubmitSalesGoal = async () => {
     setGlobal({ salesGoal });
-    console.log(salesGoal);
+    let amount = parseInt(salesGoal, 10);
+    console.log(amount);
+    try {
+      const res = await api.createMainGoal(
+        { amount },
+        api.getGoalStorage.goalId(),
+        api.getGoalStorage.orgId(),
+      );
+      console.log(res);
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   const handleSubmitGoalsPerDay = () => {

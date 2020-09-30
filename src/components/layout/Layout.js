@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Nav from '../common/nav/Nav';
 import Goals from '../goals/Goals';
 import GoalSettings from '../goalSettings/GoalSettings';
@@ -13,9 +13,6 @@ const Layout = () => {
   useEffect(() => {
     setOrgId(api.getStorage.orgId());
   }, [api.getStorage.orgId(), setOrgId]);
-
-  // if (!orgId) return <Redirect to='/org/registration' />;
-  // if (orgId) return <Redirect to='/sales/organization-registration' />;
 
   return (
     <div>
