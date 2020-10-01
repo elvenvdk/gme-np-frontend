@@ -4,6 +4,7 @@ import Nav from '../common/nav/Nav';
 import Goals from '../goals/Goals';
 import GoalSettings from '../goalSettings/GoalSettings';
 import OrgRegistration from '../orgRegistration/OrgRegistration';
+import UserManagement from '../auth/userManagement/UserManagement';
 import api from '../../api';
 import './Layout.scss';
 
@@ -23,8 +24,10 @@ const Layout = () => {
         <Route
           path='/sales/organization-registration'
           exact
-          component={OrgRegistration}
+          compon
+          ent={OrgRegistration}
         />
+        <Route path='/sales/user-management' exact component={UserManagement} />
       </Switch>
     </div>
   );

@@ -18,27 +18,28 @@ export const removeGoalStorage = () => {
   localStorage.removeItem('goalId');
 };
 
-export const createMainGoal = async ({ amount }, goalId, orgId) => {
-  console.log('From Sales API: ', { amount }, goalId, orgId);
+export const createMainGoal = async ({ amount }, orgId) => {
   try {
     const res = await axios.post(
-      `${API_URL}/goals/create/main-goal?goalId=${goalId}&orgId=${orgId}`,
+      `${API_URL}/goals/create/main-goal?orgId=${orgId}`,
       { amount },
     );
-    console.log({ res });
-    return res.data;
+    setGoalStorage(res.data.goalId);
+    return res;
   } catch (error) {
     if (error) return error.response.data;
   }
 };
 
-export const createDayGoal = async ({ amount }, goalId, orgId) => {
+export const updateMainGoal = async ({ amount }, goalId, orgId) => {
+  // console.log('From Sales API: ', { amount }, goalId, orgId);
   try {
-    const res = await axios.post(
-      `${API_URL}/goals/create/day-goal?goalId=${goalId}&orgId=${orgId}`,
+    const res = await axios.put(
+      `${API_URL}/goals/update/main-goal?goalId=${goalId}&orgId=${orgId}`,
       { amount },
     );
-    return res.data;
+    console.log(res.data);
+    return res;
   } catch (error) {
     if (error) return error.response.data;
   }
@@ -47,16 +48,7 @@ export const createDayGoal = async ({ amount }, goalId, orgId) => {
 export const getMainGoal = async (orgId) => {
   try {
     const res = await axios.get(`${API_URL}/goals/main?orgId=${orgId}`);
-    return res.data;
-  } catch (error) {
-    if (error) return error.response.data;
-  }
-};
-
-export const getDayGoal = async (orgId) => {
-  try {
-    const res = await axios.get(`${API_URL}/goals/salesday?orgId=${orgId}`);
-    return res.data;
+    return res.data.amount;
   } catch (error) {
     if (error) return error.response.data;
   }
@@ -75,9 +67,8 @@ export const getMainGoalDiff = async (orgId) => {
 
 export default {
   createMainGoal,
-  createDayGoal,
+  updateMainGoal,
   getMainGoal,
-  getDayGoal,
   getMainGoalDiff,
   setGoalStorage,
   getGoalStorage,

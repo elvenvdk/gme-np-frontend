@@ -8,18 +8,27 @@ import './AuthForm.scss';
 const inputDefaults = {
   firstName: '',
   lastName: '',
+  userName: '',
   email: '',
   password: '',
   role: 'seller',
   orgName: '',
 };
 
-const Form = ({ hasCheckbox, signup }) => {
+const Form = ({ hasCheckbox, signup, userMngt }) => {
   const history = useHistory();
   const [inputData, setInputData] = useState(inputDefaults);
   const [orgId, setOrgId] = useState(null);
 
-  const { firstName, lastName, email, password, role, orgName } = inputData;
+  const {
+    firstName,
+    lastName,
+    userName,
+    email,
+    password,
+    role,
+    orgName,
+  } = inputData;
 
   const [errorMessage, setErrorMessage] = useState(null);
   const [confirmationMessage, setConfirmationMessage] = useState(null);
@@ -96,6 +105,14 @@ const Form = ({ hasCheckbox, signup }) => {
             onChange={(e) => handleChange(e)}
             placeholder='Last Name'
           />
+          <input
+            type='text'
+            className='form-container-input'
+            name='userName'
+            value={userName}
+            onChange={(e) => handleChange(e)}
+            placeholder='Username'
+          />
 
           {orgId && (
             <input
@@ -167,7 +184,12 @@ const Form = ({ hasCheckbox, signup }) => {
         className='form-container-input submit'
         value={`${signup ? 'Register' : 'Log in'}`}
       />
-      {!signup ? <p>Not registered yet?</p> : <p>Already registered?</p>}
+      {!userMngt && !signup ? (
+        <p>Not registered yet?</p>
+      ) : (
+        <p>Already registered?</p>
+      )}
+
       <input
         type='submit'
         className='form-container-input register-btn'

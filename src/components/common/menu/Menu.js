@@ -26,6 +26,11 @@ const Menu = () => {
         Log Out
       </li>
       <li onClick={() => handleSelected()} className='menu-list-item'>
+        <Link className='menu-list-item-link' to='/sales/user-management'>
+          User Management
+        </Link>
+      </li>
+      <li onClick={() => handleSelected()} className='menu-list-item'>
         <Link className='menu-list-item-link' to='/sales/goals'>
           Goals
         </Link>
