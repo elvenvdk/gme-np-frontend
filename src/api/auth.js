@@ -68,6 +68,32 @@ export const register = async ({
   }
 };
 
+export const registerOwner = async ({
+  firstName,
+  lastName,
+  email,
+  password,
+  role,
+  orgName,
+  userName,
+}) => {
+  try {
+    const res = await axios.post(`${API_URL}/auth/owner-registration`, {
+      firstName,
+      lastName,
+      email,
+      password,
+      role,
+      orgName,
+      userName,
+    });
+    // console.log({ registerationResponse: res.data });
+    return res.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
 export const login = async ({ email, password }) => {
   console.log({ email, password });
   try {
@@ -155,6 +181,7 @@ export default {
   getStorage,
   removeStorage,
   register,
+  registerOwner,
   login,
   logout,
   emailVerificationCheck,

@@ -67,7 +67,10 @@ const Form = ({ hasCheckbox, signup, userMngt }) => {
     e.preventDefault();
     if (signup) {
       console.log(inputData);
-      const response = await api.register(inputData);
+      const response =
+        role === 'owner'
+          ? await api.registerOwner(inputData)
+          : await api.register(inputData);
       console.log(response);
       if (response?.error) {
         setErrorMessage(response.error);
