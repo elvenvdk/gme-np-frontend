@@ -13,6 +13,7 @@ const inputDefaults = {
   password: '',
   role: 'seller',
   orgName: '',
+  org: '',
 };
 
 const Form = ({ hasCheckbox, signup, userMngt }) => {
@@ -28,6 +29,7 @@ const Form = ({ hasCheckbox, signup, userMngt }) => {
     password,
     role,
     orgName,
+    org,
   } = inputData;
 
   const [errorMessage, setErrorMessage] = useState(null);
@@ -35,7 +37,8 @@ const Form = ({ hasCheckbox, signup, userMngt }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setOrgId(api.getStorage.orgId());
+    if (api.getStorage.orgId())
+      setInputData({ ...inputData, org: api.getStorage.orgId() });
   }, []);
 
   const handleChange = (e) => {
@@ -63,6 +66,7 @@ const Form = ({ hasCheckbox, signup, userMngt }) => {
     setLoading(true);
     e.preventDefault();
     if (signup) {
+      console.log(inputData);
       const response = await api.register(inputData);
       console.log(response);
       if (response?.error) {
@@ -114,7 +118,7 @@ const Form = ({ hasCheckbox, signup, userMngt }) => {
             placeholder='Username'
           />
 
-          {orgId && (
+          {org && (
             <input
               type='text'
               className='form-container-input'

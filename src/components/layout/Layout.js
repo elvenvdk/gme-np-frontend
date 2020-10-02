@@ -24,8 +24,7 @@ const Layout = () => {
         <Route
           path='/sales/organization-registration'
           exact
-          compon
-          ent={OrgRegistration}
+          component={OrgRegistration}
         />
         <Route path='/sales/user-management' exact component={UserManagement} />
       </Switch>

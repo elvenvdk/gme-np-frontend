@@ -46,6 +46,8 @@ export const register = async ({
   email,
   password,
   role,
+  orgName,
+  userName,
   org,
 }) => {
   try {
@@ -55,6 +57,8 @@ export const register = async ({
       email,
       password,
       role,
+      orgName,
+      userName,
       org,
     });
     // console.log({ registerationResponse: res.data });
@@ -113,7 +117,7 @@ export const emailVerificationCheck = async (token) => {
       });
       setGlobal({
         userId: res.data.id,
-        role: res.data.rol,
+        role: res.data.role,
       });
     }
 
