@@ -64,10 +64,7 @@ const GoalSettings = () => {
 
     try {
       setLoading(true);
-      const res = await api.createMainGoal(
-        { amount },
-        api.getGoalStorage.orgId(),
-      );
+      const res = await api.createMainGoal({ amount });
       console.log(res);
       setGoals({
         ...goals,
@@ -105,7 +102,7 @@ const GoalSettings = () => {
           {message.confirmation ? (
             <p>{message.confirmation}</p>
           ) : message.error ? (
-            <p>{message.error}</p>
+            <p>{message?.error}</p>
           ) : (
             <></>
           )}

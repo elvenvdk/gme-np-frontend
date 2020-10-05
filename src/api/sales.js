@@ -18,10 +18,10 @@ export const removeGoalStorage = () => {
   localStorage.removeItem('goalId');
 };
 
-export const createMainGoal = async ({ amount }, orgId) => {
+export const createMainGoal = async ({ amount }) => {
   try {
     const res = await axios.post(
-      `${API_URL}/goals/create/main-goal?orgId=${orgId}`,
+      `${API_URL}/goals/create/main-goal?orgId=${getGoalStorage.orgId()}`,
       { amount },
     );
     setGoalStorage(res.data.goalId);
