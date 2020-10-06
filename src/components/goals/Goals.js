@@ -11,10 +11,10 @@ import './Goals.scss';
 
 const Goals = () => {
   const [goalDiffTypes, setGoalDiffTypes] = useState({
-    dollar: true,
-    perc: false,
+    dollar: false,
+    percentage: true,
   });
-  const { dollar, perc } = goalDiffTypes;
+  const { dollar, percentage } = goalDiffTypes;
   const [goals, setGoals] = useState({
     mainGoal: 0,
     dayGoal: 0,
@@ -32,7 +32,7 @@ const Goals = () => {
   });
   const { error, confirmation } = message;
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const getMainGoal = async () => {
     try {
@@ -85,7 +85,11 @@ const Goals = () => {
     return (
       <div>
         <h4>Total/Goal Difference</h4>
-        <select id='goal-diff-selector' onChange={handleDiffTypeChange}>
+        <select
+          id='goal-diff-selector'
+          value={percentage ? 'percentage' : dollar ? 'dollar' : 'percentage'}
+          onChange={handleDiffTypeChange}
+        >
           <option value='dollar' id='dollar'>
             $
           </option>
