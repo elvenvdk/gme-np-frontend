@@ -4,13 +4,17 @@ import { Space, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import api from '../../api';
-import { formatCurrency } from '../../helpers/Helpers';
+import { formatCurrency, formatPercentage } from '../../helpers/Helpers';
 import Button from '../common/button/Button';
 import Tile from '../common/tile/Tile';
 import './Goals.scss';
 
 const Goals = () => {
-  // const [goals] = useGlobal('goals');
+  const [goalDiffTypes, setGoalDiffTypes] = useState({
+    dollar: true,
+    perc: false,
+  });
+  const { dollar, perc } = goalDiffTypes;
   const [goals, setGoals] = useState({
     mainGoal: 0,
     dayGoal: 0,
@@ -72,7 +76,34 @@ const Goals = () => {
     getTotalSales();
   }, []);
 
-  const getGoalDiff = () => mainGoal - total;
+  const diffType = {
+    dollar: () => total - mainGoal,
+    percentage: () => (total - mainGoal) / mainGoal,
+  };
+
+  const diffTypeSelector = () => {
+    return (
+      <div>
+        <h4>Total/Goal Difference</h4>
+        <select id='goal-diff-selector' onChange={handleDiffTypeChange}>
+          <option value='dollar' id='dollar'>
+            $
+          </option>
+          <option value='percentage' id='percentage'>
+            %
+          </option>
+        </select>
+      </div>
+    );
+  };
+
+  const handleDiffTypeChange = (e) => {
+    setGoalDiffTypes({
+      ...goalDiffTypes,
+      dollar: e.target.value === 'dollar' ? true : false,
+      percentage: e.target.value === 'percentage' ? true : false,
+    });
+  };
 
   if (!api.getStorage.orgId())
     return <Redirect to='/sales/organization-registration' />;
@@ -102,7 +133,14 @@ const Goals = () => {
           <div className='goals-tiles'>
             <Tile title='Sales Goal' data={formatCurrency(mainGoal)} />
             <Tile title='Total Sales' data={formatCurrency(total)} />
-            <Tile title='Goal Diff' data={formatCurrency(getGoalDiff())} />
+            <Tile
+              title={diffTypeSelector()}
+              data={
+                dollar
+                  ? formatCurrency(diffType.dollar())
+                  : formatPercentage(diffType.percentage())
+              }
+            />
             <Tile title='Charts' icon>
               <FontAwesomeIcon
                 className='goals-chart-icon'
