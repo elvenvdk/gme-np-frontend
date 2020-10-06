@@ -1,76 +1,28 @@
 import axios from 'axios';
+import moment from 'moment';
 
-import { setStorage, getStorage } from './auth';
+import { getStorage } from './auth';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export const setGoalStorage = (goalId) => {
-  if (goalId) localStorage.setItem('goalId', JSON.stringify(goalId));
-};
-
-export const getGoalStorage = {
-  goalId: () => JSON.parse(localStorage.getItem('goalId')),
-  orgId: () => JSON.parse(localStorage.getItem('orgId')),
-  orgName: () => JSON.parse(localStorage.getItem('orgName')),
-};
-
-export const removeGoalStorage = () => {
-  localStorage.removeItem('goalId');
-};
-
-export const createMainGoal = async ({ amount }) => {
-  try {
-    const res = await axios.post(
-      `${API_URL}/goals/create/main-goal?orgId=${getGoalStorage.orgId()}`,
-      { amount },
-    );
-    setGoalStorage(res.data.goalId);
-    return res;
-  } catch (error) {
-    if (error) return error.response.data;
-  }
-};
-
-export const updateMainGoal = async ({ amount }, goalId, orgId) => {
-  // console.log('From Sales API: ', { amount }, goalId, orgId);
-  try {
-    const res = await axios.put(
-      `${API_URL}/goals/update/main-goal?goalId=${goalId}&orgId=${orgId}`,
-      { amount },
-    );
-    console.log(res.data);
-    return res;
-  } catch (error) {
-    if (error) return error.response.data;
-  }
-};
-
-export const getMainGoal = async (orgId) => {
-  try {
-    const res = await axios.get(`${API_URL}/goals/main?orgId=${orgId}`);
-    return res.data.amount;
-  } catch (error) {
-    if (error) return error.response.data;
-  }
-};
-
-export const getMainGoalDiff = async (orgId) => {
+export const getSales = async () => {
+  // const startDate = '2020-10-02T20:10:18.431Z';
+  // const day = moment().startOf('day');
+  // const startDate = day.toDate('2020-10-02T20:10:18.431Z');
+  // const endDate = moment(day).endOf('day').toDate();
+  const startDate = moment('2020-10-02T20:10:18.431Z').format('YYYYMMDD');
+  const endDate = moment().format('YYYYMMDD');
+  console.log({ startDate, endDate });
   try {
     const res = await axios.get(
-      `${API_URL}/goals/main-goal-diff?orgId=${orgId}`,
+      `${API_URL}/sales?org=${getStorage.orgId()}&startDate=${startDate}&endDate=${endDate}`,
     );
     return res.data;
   } catch (error) {
-    if (error) return error.response.data;
+    return error.response.data;
   }
 };
 
 export default {
-  createMainGoal,
-  updateMainGoal,
-  getMainGoal,
-  getMainGoalDiff,
-  setGoalStorage,
-  getGoalStorage,
-  removeGoalStorage,
+  getSales,
 };

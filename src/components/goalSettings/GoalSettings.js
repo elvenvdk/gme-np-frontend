@@ -37,11 +37,7 @@ const GoalSettings = () => {
     if (api.getGoalStorage.goalId()) {
       try {
         setLoading(true);
-        const res = await api.updateMainGoal(
-          { amount },
-          api.getGoalStorage.goalId(),
-          api.getGoalStorage.orgId(),
-        );
+        const res = await api.updateMainGoal({ amount });
         setGoals({
           ...goals,
           salesGoal: 0,

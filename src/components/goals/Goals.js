@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Spin, Space } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartBar } from '@fortawesome/free-solid-svg-icons';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Space, Spin } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-
-import { formatCurrency } from '../../helpers/Helpers';
-
 import api from '../../api';
-
-import Tile from '../common/tile/Tile';
+import { formatCurrency } from '../../helpers/Helpers';
 import Button from '../common/button/Button';
+import Tile from '../common/tile/Tile';
 import './Goals.scss';
 
 const Goals = () => {
@@ -19,11 +15,18 @@ const Goals = () => {
     mainGoal: 0,
     dayGoal: 0,
   });
+  const { mainGoal, dayGoal } = goals;
+  const [sales, setSales] = useState({
+    count: 0,
+    total: 0,
+  });
+  const { count, total } = sales;
 
   const [message, setMessage] = useState({
     error: '',
     confirmation: '',
   });
+  const { error, confirmation } = message;
 
   const [loading, setLoading] = useState(true);
 
@@ -46,11 +49,30 @@ const Goals = () => {
     }
   };
 
+  const getTotalSales = async () => {
+    try {
+      setLoading(true);
+      const res = await api.getSales();
+      setSales({
+        ...sales,
+        count: res.salesCount,
+        total: res.orderTotal,
+      });
+    } catch (error) {
+      setMessage({
+        ...message,
+        error,
+      });
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     getMainGoal();
+    getTotalSales();
   }, []);
 
-  console.log({ mainGoal: goals.mainGoal });
+  const getGoalDiff = () => mainGoal - total;
 
   if (!api.getStorage.orgId())
     return <Redirect to='/sales/organization-registration' />;
@@ -78,11 +100,10 @@ const Goals = () => {
             <Button>Settings</Button>
           </Link>
           <div className='goals-tiles'>
-            <Tile title='Sales Goal' data={formatCurrency(goals.mainGoal)} />
-            <Tile title='Total Sales' data='$6,712.00' />
-            <Tile title='Goal Diff' data='$5,001.00' />
-            <Tile title='Sales Per Day' data='$1,000.00' />
-            <Tile title='Sales goal' icon>
+            <Tile title='Sales Goal' data={formatCurrency(mainGoal)} />
+            <Tile title='Total Sales' data={formatCurrency(total)} />
+            <Tile title='Goal Diff' data={formatCurrency(getGoalDiff())} />
+            <Tile title='Charts' icon>
               <FontAwesomeIcon
                 className='goals-chart-icon'
                 icon={faChartBar}
