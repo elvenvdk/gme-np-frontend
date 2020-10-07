@@ -1,9 +1,11 @@
+import React, { useEffect, useState } from 'react';
 import { faChartBar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Space, Spin } from 'antd';
-import React, { useEffect, useState } from 'react';
+
 import { Link, Redirect } from 'react-router-dom';
 import api from '../../api';
+import SalesChart from '../salesChart/SalesChart';
 import { formatCurrency, formatPercentage } from '../../helpers/Helpers';
 import Button from '../common/button/Button';
 import Tile from '../common/tile/Tile';
@@ -33,6 +35,8 @@ const Goals = () => {
   const { error, confirmation } = message;
 
   const [loading, setLoading] = useState(false);
+
+  const [chartVisible, setChartVisible] = useState(false);
 
   const getMainGoal = async () => {
     try {
@@ -134,26 +138,36 @@ const Goals = () => {
           <Link className='goals-settings-link' to='/sales/goal-settings'>
             <Button>Settings</Button>
           </Link>
-          <div className='goals-tiles'>
-            <Tile title='Sales Goal' data={formatCurrency(mainGoal)} />
-            <Tile title='Total Sales' data={formatCurrency(total)} />
-            <Tile
-              title={diffTypeSelector()}
-              data={
-                dollar
-                  ? formatCurrency(diffType.dollar())
-                  : formatPercentage(diffType.percentage())
-              }
-            />
-            <Tile title='Charts' icon>
-              <FontAwesomeIcon
-                className='goals-chart-icon'
-                icon={faChartBar}
-                height='10px'
-                width='10px'
+
+          {!chartVisible ? (
+            <div className='goals-tiles'>
+              <Tile title='Sales Goal' data={formatCurrency(mainGoal)} />
+              <Tile title='Total Sales' data={formatCurrency(total)} />
+              <Tile
+                title={diffTypeSelector()}
+                data={
+                  dollar
+                    ? formatCurrency(diffType.dollar())
+                    : formatPercentage(diffType.percentage())
+                }
               />
-            </Tile>
-          </div>
+              <Tile
+                title='Charts'
+                icon
+                className='goals-charts'
+                onClick={() => setChartVisible(true)}
+              >
+                <FontAwesomeIcon
+                  className='goals-chart-icon'
+                  icon={faChartBar}
+                  height='10px'
+                  width='10px'
+                />
+              </Tile>
+            </div>
+          ) : (
+            <SalesChart hideChart={() => setChartVisible(false)} />
+          )}
         </>
       )}
     </div>

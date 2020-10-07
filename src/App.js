@@ -13,7 +13,7 @@ const App = () => {
     setUserId(api.getStorage.userId());
     setGlobal({ userId: api.getStorage.userId() });
   }, [api.getStorage.userId(), setUserId]);
-  console.log('HELLO APP...');
+
   return (
     <div className='App'>
       <Switch>

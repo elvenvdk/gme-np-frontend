@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { setGlobal } from 'reactn';
+import { Link } from 'react-router-dom';
 import { Spin, Space } from 'antd';
 
 import Tile from '../common/tile/Tile';
@@ -80,15 +81,14 @@ const GoalSettings = () => {
     }
   };
 
-  console.log(goals);
-
   return (
     <div className='goalsettings'>
       <h1 className='goalsettings-header'>Goal Settings</h1>
       <div className='goalsettings-tiles'>
         <Tile title='Sales Goal' child>
           <input
-            type='text'
+            type='number'
+            min='0'
             className='goalsettings-tiles-input'
             value={salesGoal}
             name='salesGoal'
@@ -108,6 +108,9 @@ const GoalSettings = () => {
             value='Enter Sales Goal'
             onClick={handleSubmitSalesGoal}
           />
+          <Link className='goals-link' to='/sales/goals'>
+            <p>Back to Goals</p>
+          </Link>
         </Tile>
       </div>
     </div>
