@@ -5,11 +5,12 @@ import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
 import Register from '../register/Register';
 import Login from '../login/Login';
 import EmailVerificationCheck from '../emailVerificationCheck/EmailVerificationCheck';
+import api from '../../../api';
 
 import './Layout.scss';
 
 const Layout = () => {
-  const { userId } = getGlobal();
+  const userId = api.getStorage.userId();
   const { orgId } = getGlobal();
   const location = useLocation();
 
@@ -24,18 +25,16 @@ const Layout = () => {
     );
   }
 
-  if (orgId) {
-    return (
-      <Redirect
-        to={
-          location.state?.from?.pathName + location.state?.from?.search ||
-          '/sales/goals'
-        }
-      />
-    );
-  }
-
-  console.log(location.state?.from?.pathName + location.state?.from?.search);
+  // if (orgId) {
+  //   return (
+  //     <Redirect
+  //       to={
+  //         location.state?.from?.pathName + location.state?.from?.search ||
+  //         '/sales/goals'
+  //       }
+  //     />
+  //   );
+  // }
 
   return (
     <div className='auth-layout'>

@@ -9,11 +9,20 @@ import './Menu.scss';
 const Menu = () => {
   const history = useHistory();
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({
+    error: '',
+    confirmation: '',
+  });
 
-  const handleLogout = () => {
-    api.logout();
-    setVisible(false);
-    history.push('/auth/login');
+  const { error, confirmation } = message;
+
+  const handleLogout = async () => {
+    try {
+      const res = await api.logout();
+      setVisible(false);
+      return history.push('/auth/login');
+    } catch (error) {}
   };
 
   const handleSelected = () => {
@@ -22,7 +31,7 @@ const Menu = () => {
 
   const renderMenu = () => (
     <ul className='menu-list'>
-      <li className='menu-list-item' onClick={() => handleLogout()}>
+      <li className='menu-list-item logout' onClick={() => handleLogout()}>
         Log Out
       </li>
       <li onClick={() => handleSelected()} className='menu-list-item'>

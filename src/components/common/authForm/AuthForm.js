@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 import api from '../../../api';
 
@@ -16,7 +16,7 @@ const inputDefaults = {
   org: '',
 };
 
-const Form = ({ hasCheckbox, signup, userMngt }) => {
+const Form = ({ hasCheckbox, signup, userMngt, onClick }) => {
   const history = useHistory();
   const [inputData, setInputData] = useState(inputDefaults);
   const [orgId, setOrgId] = useState(null);
@@ -85,15 +85,16 @@ const Form = ({ hasCheckbox, signup, userMngt }) => {
     if (response?.error) {
       setErrorMessage(response.error);
       setLoading(false);
-      return;
     }
     setConfirmationMessage(response.msg);
     setLoading(false);
     setInputData({ ...inputDefaults });
+    return history.push('/sales/goals');
   };
 
   const renderForm = () => (
     <form onSubmit={(e) => handleSubmit(e)} className='form-container'>
+      {userMngt ? <p onClick={onClick}>Back to user management</p> : <></>}
       {signup && (
         <>
           <input
@@ -218,6 +219,7 @@ const Form = ({ hasCheckbox, signup, userMngt }) => {
       ) : (
         <></>
       )}
+      {userMngt ? <p onClick={onClick}>Back to user management</p> : <></>}
     </div>
   );
 };
