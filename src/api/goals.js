@@ -47,7 +47,9 @@ export const updateMainGoal = async ({ amount }) => {
 
 export const getMainGoal = async (orgId) => {
   try {
-    const res = await axios.get(`${API_URL}/goals/main?orgId=${orgId}`);
+    const res = await axios.get(
+      `${API_URL}/goals/main?orgId=${getGoalStorage.orgId()}`,
+    );
     return res.data.amount;
   } catch (error) {
     if (error) return error.response.data;

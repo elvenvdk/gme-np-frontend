@@ -41,7 +41,7 @@ const Goals = () => {
   const getMainGoal = async () => {
     try {
       setLoading(true);
-      const res = await api.getMainGoal(api.getStorage.orgId());
+      const res = await api.getMainGoal();
       setGoals({ ...goals, mainGoal: res });
       setLoading(false);
       setMessage({
