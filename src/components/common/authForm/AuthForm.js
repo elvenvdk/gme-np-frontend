@@ -16,7 +16,7 @@ const inputDefaults = {
   org: '',
 };
 
-const Form = ({ hasCheckbox, signup, userMngt }) => {
+const Form = ({ hasCheckbox, signup, userMngt, onClick }) => {
   const history = useHistory();
   const [inputData, setInputData] = useState(inputDefaults);
   const [orgId, setOrgId] = useState(null);
@@ -94,6 +94,7 @@ const Form = ({ hasCheckbox, signup, userMngt }) => {
 
   const renderForm = () => (
     <form onSubmit={(e) => handleSubmit(e)} className='form-container'>
+      {userMngt ? <p onClick={onClick}>Back to user management</p> : <></>}
       {signup && (
         <>
           <input
@@ -218,6 +219,7 @@ const Form = ({ hasCheckbox, signup, userMngt }) => {
       ) : (
         <></>
       )}
+      {userMngt ? <p onClick={onClick}>Back to user management</p> : <></>}
     </div>
   );
 };

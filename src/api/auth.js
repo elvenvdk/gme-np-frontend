@@ -29,11 +29,7 @@ export const getStorage = {
 };
 
 export const removeStorage = () => {
-  localStorage.removeItem('userId');
-  localStorage.removeItem('role');
-  localStorage.removeItem('orgId');
-  localStorage.removeItem('orgName');
-  localStorage.removeItem('userId');
+  localStorage.clear();
 };
 
 /**
@@ -125,8 +121,34 @@ export const login = async ({ email, password }) => {
   }
 };
 
-export const logout = () => {
-  removeStorage();
+export const logout = async () => {
+  try {
+    const res = await axios.post(
+      `${API_URL}/auth/logout?userId=${getStorage.userId()}`,
+    );
+    removeStorage();
+    return res.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export const userLogout = async ({ email }) => {
+  try {
+    const res = await axios.post(`${API_URL}/auth/logout?email=${email}`);
+    return res.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export const lockoutComplete = async ({ email }) => {
+  try {
+    const res = await axios.post(`${API_URL}/auth/lockout?email=${email}`);
+    return res.data;
+  } catch (error) {
+    return error.response.data;
+  }
 };
 
 export const emailVerificationCheck = async (token) => {
@@ -184,6 +206,8 @@ export default {
   registerOwner,
   login,
   logout,
+  lockoutComplete,
+  userLogout,
   emailVerificationCheck,
   forgotPassword,
   forgotPasswordVerification,
