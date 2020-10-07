@@ -66,7 +66,7 @@ const UserManagement = () => {
       ) : (
         <></>
       )}
-      {userLogout ? <SellerLogout /> : <></>}
+      {userLogout ? <SellerLogout onClick={handleResetVisible} /> : <></>}
     </div>
   );
 };
