@@ -11,6 +11,7 @@ export const setStorage = ({
   orgName,
   token,
   orgToken,
+  goalId,
 }) => {
   if (userId) localStorage.setItem('userId', JSON.stringify(userId));
   if (role) localStorage.setItem('role', JSON.stringify(role));
@@ -18,6 +19,8 @@ export const setStorage = ({
   if (orgName) localStorage.setItem('orgName', JSON.stringify(orgName));
   if (token) localStorage.setItem('token', JSON.stringify(token));
   if (orgToken) localStorage.setItem('orgToken', JSON.stringify(orgToken));
+  if (goalId && goalId !== 'N/A')
+    localStorage.setItem('goalId', JSON.stringify(goalId));
 };
 
 export const getStorage = {
@@ -91,9 +94,9 @@ export const registerOwner = async ({
 };
 
 export const login = async ({ email, password }) => {
-  console.log({ email, password });
   try {
     const res = await axios.post(`${API_URL}/auth/login`, { email, password });
+    console.log(res.data);
     if (res?.data.role === roleTypes.SELLER)
       return {
         error:
@@ -106,6 +109,7 @@ export const login = async ({ email, password }) => {
       orgId: res.data.orgId,
       orgToken: res.data.orgToken,
       orgName: res.data.orgName,
+      goalId: res.data.goalId,
     });
     setGlobal({
       userId: res.data.id,
@@ -114,6 +118,7 @@ export const login = async ({ email, password }) => {
       orgId: res.data.orgId,
       orgToken: res.data.orgToken,
       orgName: res.data.orgName,
+      goalId: res.data.goalId,
     });
     return res.data;
   } catch (error) {
