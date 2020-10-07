@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 import api from '../../../api';
 
@@ -85,11 +85,11 @@ const Form = ({ hasCheckbox, signup, userMngt, onClick }) => {
     if (response?.error) {
       setErrorMessage(response.error);
       setLoading(false);
-      return;
     }
     setConfirmationMessage(response.msg);
     setLoading(false);
     setInputData({ ...inputDefaults });
+    return history.push('/sales/goals');
   };
 
   const renderForm = () => (

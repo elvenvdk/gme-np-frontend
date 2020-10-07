@@ -21,7 +21,7 @@ const Menu = () => {
     try {
       const res = await api.logout();
       setVisible(false);
-      history.push('/auth/login');
+      return history.push('/auth/login');
     } catch (error) {}
   };
 
