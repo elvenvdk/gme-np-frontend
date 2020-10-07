@@ -2,7 +2,7 @@ import React from 'react';
 import { useGlobal } from 'reactn';
 import { Route, Redirect } from 'react-router-dom';
 
-const OwnerRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
   const [userId] = useGlobal('userId');
   return (
     <Route
@@ -20,4 +20,4 @@ const OwnerRoute = ({ component: Component, ...rest }) => {
   );
 };
 
-export default OwnerRoute;
+export default PrivateRoute;

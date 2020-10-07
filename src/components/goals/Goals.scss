@@ -25,6 +25,10 @@
     flex-wrap: wrap;
   }
 
+  .goals-charts {
+    cursor: pointer;
+  }
+
   @media screen and (min-width: 600px) {
     &-settings-link {
       width: 30rem;

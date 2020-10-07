@@ -1,5 +1,13 @@
-import { register } from './auth';
+import auth from './auth';
+import org from './org';
+import goals from './goals';
+import sales from './sales';
 
-const api = { ...register };
+const api = {
+  ...auth,
+  ...org,
+  ...goals,
+  ...sales,
+};
 
 export default api;

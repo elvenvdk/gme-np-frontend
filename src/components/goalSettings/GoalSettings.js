@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { setGlobal } from 'reactn';
+import { Link } from 'react-router-dom';
+import { Spin, Space } from 'antd';
 
 import Tile from '../common/tile/Tile';
 import { formatCurrency } from '../../helpers/Helpers';
+import api from '../../api';
 
 import './GoalSettings.scss';
 
 const GoalSettings = () => {
   const [goals, setGoals] = useState({
     salesGoal: 0,
-    goalsPerDay: 0,
   });
 
-  const { salesGoal, goalsPerDay } = goals;
+  const { salesGoal } = goals;
+
+  const [message, setMessage] = useState({
+    error: '',
+    confirmation: '',
+  });
+
+  const [loading, setLoading] = useState(false);
 
   const handleGoals = (e) => {
     setGoals({
@@ -21,17 +30,56 @@ const GoalSettings = () => {
     });
   };
 
-  const handleSubmitSalesGoal = () => {
+  const handleSubmitSalesGoal = async () => {
     setGlobal({ salesGoal });
-    console.log(salesGoal);
-  };
+    let amount = parseInt(salesGoal, 10);
+    console.log(amount);
 
-  const handleSubmitGoalsPerDay = () => {
-    console.log(goalsPerDay);
-    setGlobal({ goalsPerDay });
-  };
+    if (api.getGoalStorage.goalId()) {
+      try {
+        setLoading(true);
+        const res = await api.updateMainGoal({ amount });
+        setGoals({
+          ...goals,
+          salesGoal: 0,
+        });
+        setLoading(false);
+        setMessage({
+          ...message,
+          confirmation: res.msg,
+        });
+        return;
+      } catch (error) {
+        setLoading(false);
+        setMessage({
+          ...message,
+          error,
+        });
+        return;
+      }
+    }
 
-  console.log(goals);
+    try {
+      setLoading(true);
+      const res = await api.createMainGoal({ amount });
+      console.log(res);
+      setGoals({
+        ...goals,
+        salesGoal: 0,
+      });
+      setLoading(false);
+      setMessage({
+        ...message,
+        confirmation: res.msg,
+      });
+    } catch (error) {
+      setLoading(false);
+      setMessage({
+        ...message,
+        error,
+      });
+    }
+  };
 
   return (
     <div className='goalsettings'>
@@ -39,33 +87,30 @@ const GoalSettings = () => {
       <div className='goalsettings-tiles'>
         <Tile title='Sales Goal' child>
           <input
-            type='text'
+            type='number'
+            min='0'
             className='goalsettings-tiles-input'
             value={salesGoal}
             name='salesGoal'
             onChange={(e) => handleGoals(e)}
           />
+          <br />
+          {message.confirmation ? (
+            <p>{message.confirmation}</p>
+          ) : message.error ? (
+            <p>{message?.error}</p>
+          ) : (
+            <></>
+          )}
           <input
             type='button'
             className='goalsettings-tiles-input-btn'
             value='Enter Sales Goal'
             onClick={handleSubmitSalesGoal}
           />
-        </Tile>
-        <Tile title='Goals per Day' child>
-          <input
-            type='text'
-            className='goalsettings-tiles-input'
-            value={goalsPerDay}
-            name='goalsPerDay'
-            onChange={(e) => handleGoals(e)}
-          />
-          <input
-            type='button'
-            className='goalsettings-tiles-input-btn'
-            value='Enter Goals per Day'
-            onClick={handleSubmitGoalsPerDay}
-          />
+          <Link className='goals-link' to='/sales/goals'>
+            <p>Back to Goals</p>
+          </Link>
         </Tile>
       </div>
     </div>
