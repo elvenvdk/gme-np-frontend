@@ -68,7 +68,7 @@ const Form = ({ hasCheckbox, signup, userMngt, onClick }) => {
     if (signup) {
       console.log(inputData);
       const response =
-        role === 'owner'
+        inputData.role === 'owner'
           ? await api.registerOwner(inputData)
           : await api.register(inputData);
       console.log(response);
@@ -208,6 +208,7 @@ const Form = ({ hasCheckbox, signup, userMngt, onClick }) => {
       />
     </form>
   );
+
 
   return (
     <div className='form'>

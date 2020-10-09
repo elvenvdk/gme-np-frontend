@@ -1,11 +1,12 @@
 @import '../../utils/variables.scss';
 
 .goals {
-  font-family: $font-main;
+  font-family: 'Roboto', sans-serif;
   font-weight: $font-size-main;
   position: relative;
   display: flex;
   flex-direction: column;
+  // background-color: $color-main-background;
 
   &-header {
     text-align: center;

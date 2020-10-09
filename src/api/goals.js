@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { setStorage, getStorage } from './auth';
+import { setStorage, getStorage, removeStorage } from './auth';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -27,6 +27,7 @@ export const createMainGoal = async ({ amount }) => {
     setGoalStorage(res.data.goalId);
     return res.data;
   } catch (error) {
+    
     if (error) return error.response.data;
   }
 };
@@ -41,17 +42,19 @@ export const updateMainGoal = async ({ amount }) => {
     console.log(res.data);
     return res.data;
   } catch (error) {
+    
     if (error) return error.response.data;
   }
 };
 
-export const getMainGoal = async (orgId) => {
+export const getMainGoal = async () => {
   try {
     const res = await axios.get(
       `${API_URL}/goals/main?orgId=${getGoalStorage.orgId()}`,
     );
     return res.data.amount;
   } catch (error) {
+    
     if (error) return error.response.data;
   }
 };
@@ -63,6 +66,7 @@ export const getMainGoalDiff = async (orgId) => {
     );
     return res.data;
   } catch (error) {
+    
     if (error) return error.response.data;
   }
 };

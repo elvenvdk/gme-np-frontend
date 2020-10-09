@@ -1,13 +1,12 @@
 @import '../../../utils/variables.scss';
 
 .tile {
-  font-family: $font-main;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1.5rem 0;
-  border: 0.5px solid #000000;
+  border: 3px solid #c2552d;
   height: 17rem;
   width: 17rem;
   margin: 0.5rem;
@@ -44,13 +43,12 @@
   }
 
   &-header {
-    font-family: $font-main;
     text-align: center;
     margin: auto;
+    font-size: 2rem;
   }
 
   &-data {
-    font-family: $font-main;
     text-align: center;
     font-size: $font-size-header-main;
     margin: auto;

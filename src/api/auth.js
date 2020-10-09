@@ -96,7 +96,7 @@ export const registerOwner = async ({
 export const login = async ({ email, password }) => {
   try {
     const res = await axios.post(`${API_URL}/auth/login`, { email, password });
-    console.log(res.data);
+    console.log(res);
     if (res?.data.role === roleTypes.SELLER)
       return {
         error:
