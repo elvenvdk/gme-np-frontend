@@ -11,7 +11,6 @@ import { getStorage } from './auth';
 axios.interceptors.request.use(
   (config) => {
     const token = getStorage.token();
-    console.log({token});
     config.headers.common['x-auth-token'] = token;
     return config;
   },
