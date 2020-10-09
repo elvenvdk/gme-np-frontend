@@ -1,0 +1,21 @@
+@import '../../utils/variables.scss';
+
+.sales-chart {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 65rem;
+  height: 65rem;
+  margin: 0 auto;
+
+  &-title {
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  &-hide {
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+}

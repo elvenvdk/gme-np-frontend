@@ -1,0 +1,68 @@
+@import '../../utils/variables.scss';
+
+.goals {
+  font-family: 'Roboto', sans-serif;
+  font-weight: $font-size-main;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  // background-color: $color-main-background;
+
+  &-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    display: inline-block;
+  }
+
+  &-settings-link {
+    width: 20rem;
+    margin: 0 auto;
+  }
+
+  &-tiles {
+    padding: 4rem 0;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+
+  .goals-charts {
+    cursor: pointer;
+  }
+
+  @media screen and (min-width: 600px) {
+    &-settings-link {
+      width: 30rem;
+    }
+    &-tiles {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
+  @media screen and (min-width: 700px) {
+    &-settings-link {
+      width: 35rem;
+    }
+    &-tiles {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  }
+
+  @media screen and (min-width: 992px) {
+    &-tiles {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+  }
+
+  &-chart-icon {
+    height: 5em;
+    width: 5em;
+  }
+
+  .svg-inline--fa.fa-w-16 {
+    width: 5em;
+  }
+}

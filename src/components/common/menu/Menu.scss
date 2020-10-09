@@ -1,0 +1,23 @@
+.menu-list {
+  position: fixed;
+  top: 10rem;
+  left: 5rem;
+  width: 30rem;
+  height: 25rem;
+  z-index: 7;
+  background-color: #ffffff;
+
+  &-item {
+    list-style: none;
+    margin: 2rem auto;
+
+    &-link {
+      text-decoration: none;
+      color: #000000;
+    }
+  }
+
+  .logout {
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,32 @@
+@import '../../../utils/variables.scss';
+
+.user-management {
+  height: 100vh;
+  width: 100vw;
+  padding: 0 6rem;
+  position: relative;
+
+  &-header {
+    position: relative;
+    text-align: center;
+    margin: 0 auto 10rem auto;
+  }
+
+  &-tiles {
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    &-box {
+      margin: 0 5rem 0 5rem;
+      cursor: pointer;
+    }
+  }
+
+  @media screen and (min-width: 60em) {
+    &-header {
+      font-size: $font-size-header-main;
+      top: 5rem;
+    }
+  }
+}
