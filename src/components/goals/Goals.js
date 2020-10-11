@@ -141,10 +141,25 @@ const Goals = () => {
 
           {!chartVisible ? (
             <div className='goals-tiles'>
-              <Tile title='Sales Goal' data={formatCurrency(mainGoal)} />
-              <Tile title='Total Sales' data={formatCurrency(total)} />
+              <Tile 
+                title='Sales Goal' 
+                className='goals-tiles-container' 
+                titleClassname='goals-tiles-container-title'
+                dataClassname='goals-tiles-container-data'
+                data={formatCurrency(mainGoal)} 
+              />
+              <Tile 
+                title='Total Sales'
+                className='goals-tiles-container' 
+                titleClassname='goals-tiles-container-title'
+                dataClassname='goals-tiles-container-data'
+                  data={formatCurrency(total)} 
+              />
               <Tile
                 title={diffTypeSelector()}
+                className='goals-tiles-container' 
+                titleClassname='goals-tiles-container-title-diff'
+                dataClassname='goals-tiles-container-data'
                 data={
                   dollar
                     ? formatCurrency(diffType.dollar())
@@ -154,7 +169,9 @@ const Goals = () => {
               <Tile
                 title='Charts'
                 icon
-                className='goals-charts'
+                iconClassname='goals-charts-icon-container'
+                className='goals-tiles-container goals-charts' 
+                titleClassname='goals-tiles-container-title'
                 onClick={() => setChartVisible(true)}
               >
                 <FontAwesomeIcon

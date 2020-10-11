@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   padding: 1.5rem 0;
-  border: 3px solid #c2552d;
+  border: 1px solid #c2552d;
   height: 17rem;
   width: 17rem;
   margin: 0.5rem;
@@ -46,6 +46,7 @@
     text-align: center;
     margin: auto;
     font-size: 2rem;
+    font-weight: 400;
   }
 
   &-data {
