@@ -6,7 +6,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  // background-color: $color-main-background;
+  background-color: #e6e6e6;
+  padding: 5rem 0 0 0;
 
   &-header {
     text-align: center;
@@ -19,6 +20,13 @@
   &-settings-link {
     width: 20rem;
     margin: 0 auto;
+
+    &-btn {
+      background-color: #c24127;
+      color: #f4efe7;
+      height: 3rem;
+      border: none;
+    }
   }
 
   &-tiles {
@@ -35,7 +43,7 @@
         font-weight: 400;
         font-size: 2.2rem;
         position: relative;
-        border-bottom: 1px solid #000000;
+        // border-bottom: 1px solid #000000;
         padding: 25px 0 15px 0;
         width: 100%;
         height: 8rem;

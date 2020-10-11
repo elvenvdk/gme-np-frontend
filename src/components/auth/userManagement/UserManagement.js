@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faUsers, faUsersSlash } from '@fortawesome/free-solid-svg-icons';
+
 import AuthForm from '../../common/authForm/AuthForm';
 import SellerLogout from '../../common/sellerLogout/SellerLogout';
 import Tile from '../../common/tile/Tile';
@@ -48,14 +51,24 @@ const UserManagement = () => {
         <div className='user-management-tiles'>
           <Tile
             title='Register a Seller'
+            titleClassname='user-management-tiles-item-title'
             className='user-management-tiles-box'
             onClick={handleShowRegistration}
-          />
+            iconClassname='users-icon'
+            icon
+          >
+            <FontAwesomeIcon className='users-icon' icon={faUsers} />
+          </Tile>
           <Tile
             title='Log out a Seller'
+            titleClassname='user-management-tiles-item-title'
             className='user-management-tiles-box'
+            iconClassname='users-icon'
             onClick={handleShowLogout}
-          />
+            icon
+          >
+            <FontAwesomeIcon className='users-icon' icon={faUsersSlash} />
+          </Tile>
         </div>
       ) : (
         <></>

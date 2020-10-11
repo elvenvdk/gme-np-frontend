@@ -1,11 +1,16 @@
 .menu-list {
   position: fixed;
-  top: 10rem;
-  left: 5rem;
+  top: 9rem;
+  left: 0rem;
   width: 30rem;
   height: 25rem;
   z-index: 7;
-  background-color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4efe7;
+  // color: #f4efe7;
+  padding: 0 0 0 2rem;
+
+  font-weight: 400;
 
   &-item {
     list-style: none;
@@ -13,8 +18,17 @@
 
     &-link {
       text-decoration: none;
+      // color: #f4efe7;
       color: #000000;
     }
+
+    &-link:hover {
+      color: #c24127;
+    }
+  }
+
+  &-item:hover {
+    color: #c24127;
   }
 
   .logout {

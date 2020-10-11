@@ -6,16 +6,18 @@
   align-items: center;
   justify-content: space-between;
   // border-bottom: 0.5px solid #000000;
-  font-family: 'Roboto', sans-serif;
+  // font-family: 'Roboto', sans-serif;
+  font-family: 'Playfair Display', serif;
   font-weight: $font-size-main;
   font-size: 2.5rem;
   width: 100%;
-  height: 5rem;
+  height: 8rem;
   padding: 0 2rem;
   margin-top: 1rem;
 
   &-company-name {
     margin: 0 auto;
+    color: #c24127;
   }
 
   &-user-icon {

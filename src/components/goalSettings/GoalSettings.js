@@ -85,12 +85,18 @@ const GoalSettings = () => {
     <div className='goalsettings'>
       <h1 className='goalsettings-header'>Goal Settings</h1>
       <div className='goalsettings-tiles'>
-        <Tile title='Sales Goal' child>
+        <Tile 
+          className='goalsettings-tiles-goal' 
+          titleClassname='goalsettings-tiles-goal-title' 
+          title='Sales Goal' 
+          child
+        >
           <input
             type='number'
             min='0'
             className='goalsettings-tiles-input'
-            value={salesGoal}
+            value={salesGoal === 0 ? '' : salesGoal}
+            placeholder='$'
             name='salesGoal'
             onChange={(e) => handleGoals(e)}
           />

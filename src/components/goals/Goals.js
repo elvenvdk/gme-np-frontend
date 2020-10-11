@@ -136,7 +136,7 @@ const Goals = () => {
       ) : (
         <>
           <Link className='goals-settings-link' to='/sales/goal-settings'>
-            <Button>Settings</Button>
+            <Button className='goals-settings-link-btn'>Settings</Button>
           </Link>
 
           {!chartVisible ? (

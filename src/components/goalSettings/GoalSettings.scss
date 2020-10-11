@@ -5,6 +5,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  background-color: #e6e6e6;
+  padding: 5rem 0 0 0;
+  height: 100vh;
 
   input[type='number']::-webkit-inner-spin-button,
   input[type='number']::-webkit-outer-spin-button {
@@ -17,6 +21,8 @@
   &-header {
     text-align: center;
     margin-bottom: 2rem;
+    font-weight: 400;
+    font-size: 2.5rem;
   }
 
   &-tiles {
@@ -24,6 +30,18 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+
+    &-goal {
+      height: 35rem;
+      width: 30rem;
+      background-color: #c24127;
+      color: #f4efe7;
+      border: none;
+
+      &-title {
+        font-size: 2.2rem;
+      }
+    }
 
     &-input {
       margin: 0.5rem auto 0 auto;
@@ -39,6 +57,7 @@
       width: 12rem;
       text-align: center;
       font-size: 1.1rem;
+      cursor: pointer;
     }
   }
 
@@ -53,5 +72,8 @@
 
   .goals-link {
     margin-top: 1rem;
+    cursor: pointer;
+    color: #f4efe7;
+    font-size: 1.5rem;
   }
 }

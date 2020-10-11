@@ -24,7 +24,7 @@ const Form = ({ hasCheckbox, signup, userMngt, onClick }) => {
   const {
     firstName,
     lastName,
-    userName,
+    userName, 
     email,
     password,
     role,
