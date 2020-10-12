@@ -7,6 +7,8 @@ import SellerLogout from '../../common/sellerLogout/SellerLogout';
 import Tile from '../../common/tile/Tile';
 
 import './UserManagement.scss';
+import { register } from 'numeral';
+import { logout } from '../../../api/auth';
 
 const UserManagement = () => {
   const [visible, setVisible] = useState({
@@ -46,7 +48,12 @@ const UserManagement = () => {
 
   return (
     <div className='user-management'>
-      <h1 className='user-management-header'>User Management</h1>
+      <h1 className='user-management-header'>
+        {tiles ? 'User Management' : 
+                  registration ? 'Seller Registration' : 
+                  userLogout ? 'Log Out A Seller' : 
+                  'User Management' }
+      </h1>
       {tiles ? (
         <div className='user-management-tiles'>
           <Tile

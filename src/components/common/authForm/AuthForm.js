@@ -94,7 +94,7 @@ const Form = ({ hasCheckbox, signup, userMngt, onClick }) => {
 
   const renderForm = () => (
     <form onSubmit={(e) => handleSubmit(e)} className='form-container'>
-      {userMngt ? <p onClick={onClick}>Back to user management</p> : <></>}
+      {userMngt ? <p className='back-btn-link'  onClick={onClick}>Back to user management</p> : <></>}
       {signup && (
         <>
           <input
@@ -220,7 +220,7 @@ const Form = ({ hasCheckbox, signup, userMngt, onClick }) => {
       ) : (
         <></>
       )}
-      {userMngt ? <p onClick={onClick}>Back to user management</p> : <></>}
+      {userMngt ? <p className='back-btn-link' onClick={onClick}>Back to user management</p> : <></>}
     </div>
   );
 };

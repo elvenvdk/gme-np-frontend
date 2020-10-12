@@ -2,7 +2,7 @@
 
 .user-management {
   position: relative;
-  height: 110rem;
+  height: 100rem;
   width: 100vw;
   padding: 0 6rem;
 
@@ -12,13 +12,16 @@
   &-header {
     position: relative;
     text-align: center;
-    margin: 0 auto 10rem auto;
+    margin: 0 auto 3rem auto;
+    font-weight: 400;
+    font-size: 2.5rem;
   }
 
   &-tiles {
     position: relative;
     display: flex;
     justify-content: center;
+    margin: 15rem 0 0 0;
 
     &-box {
       margin: 0 5rem 0 5rem;
@@ -51,5 +54,14 @@
       font-size: $font-size-header-main;
       top: 5rem;
     }
+  }
+
+  .back-btn-link {
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .back-btn-link:hover {
+    color: #c24127;
   }
 }
