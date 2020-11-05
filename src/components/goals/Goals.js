@@ -28,6 +28,8 @@ const Goals = () => {
   });
   const { count, total } = sales;
 
+  const [hover, setHover] = useState(false);
+
   const [message, setMessage] = useState({
     error: '',
     confirmation: '',
@@ -82,7 +84,7 @@ const Goals = () => {
 
   const diffType = {
     dollar: () => total - mainGoal,
-    percentage: () => (total - mainGoal) / mainGoal,
+    percentage: () => (total - mainGoal) / mainGoal + 1.00,
   };
 
   const diffTypeSelector = () => {
@@ -116,7 +118,7 @@ const Goals = () => {
   if (!api.getStorage.orgId())
     return <Redirect to='/sales/organization-registration' />;
 
-  // if (!goals.mainGoal) return <p>Loading Sales Goals</p>;
+
   if (!goals.mainGoal)
     return (
       <div style={{ height: '100vh', width: '100vw' }}>
@@ -170,15 +172,15 @@ const Goals = () => {
                 title='Charts'
                 icon
                 iconClassname='goals-charts-icon-container'
-                className='goals-tiles-container goals-charts' 
-                titleClassname='goals-tiles-container-title'
+                className={`goals-tiles-container goals-charts ${hover && 'hover'}`} 
+                titleClassname={`goals-tiles-container-title  ${hover && 'hover-title'}`}
                 onClick={() => setChartVisible(true)}
-              >
+                onMouseOver={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
+              > 
                 <FontAwesomeIcon
-                  className='goals-chart-icon'
+                  className={`goals-chart-icon ${hover && 'hover-chart'}`}
                   icon={faChartBar}
-                  height='10px'
-                  width='10px'
                 />
               </Tile>
             </div>

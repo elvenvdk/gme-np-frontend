@@ -2,7 +2,7 @@
 
 .user-management {
   position: relative;
-  height: 100rem;
+  height: 105rem;
   width: 100vw;
   padding: 0 6rem;
 
@@ -27,6 +27,10 @@
       margin: 0 5rem 0 5rem;
       cursor: pointer;
       padding: 0;
+    }
+
+    &-box:hover {
+      background-color: #e0d9ab;
     }
 
     &-item-title {

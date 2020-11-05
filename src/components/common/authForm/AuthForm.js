@@ -168,20 +168,26 @@ const Form = ({ hasCheckbox, signup, userMngt, onClick }) => {
             Admin
           </label>
 
-          <input
-            type='checkbox'
-            className='form-container-checkbox-group-checkbox'
-            name='role'
-            onChange={(e) => handleOwnerCheckbox(e)}
-            id='admin-checkbox'
-            value={role}
-          />
-          <label
-            className='form-container-checkbox-group-label'
-            htmlFor='admin-checkbox'
-          >
-            Owner
-          </label>
+          {
+            !userMngt && (<>
+            <input
+              type='checkbox'
+              className='form-container-checkbox-group-checkbox'
+              name='role'
+              onChange={(e) => handleOwnerCheckbox(e)}
+              id='admin-checkbox'
+              value={role}
+            />
+            <label
+              className='form-container-checkbox-group-label'
+              htmlFor='admin-checkbox'
+            >
+              Owner
+            </label>
+            </>)
+          }
+
+          
         </div>
       )}
       {errorMessage && (

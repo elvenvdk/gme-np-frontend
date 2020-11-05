@@ -36,7 +36,7 @@
       width: 30rem;
       background-color: #c24127;
       color: #f4efe7;
-      border: none;
+      border: 2px solid #d9629b;
 
       &-title {
         font-size: 2.2rem;
@@ -49,6 +49,7 @@
       width: 12rem;
       text-align: center;
       font-size: $font-size-main;
+      border: none;
     }
 
     &-input-btn {
@@ -58,6 +59,12 @@
       text-align: center;
       font-size: 1.1rem;
       cursor: pointer;
+      border: none;
+    }
+
+    &-input-btn:hover {
+      background-color: #f06260;
+      color: #f4efe7;
     }
   }
 
@@ -75,5 +82,9 @@
     cursor: pointer;
     color: #f4efe7;
     font-size: 1.5rem;
+  }
+
+  .goals-link:hover {
+    color: #e0d9ab;
   }
 }

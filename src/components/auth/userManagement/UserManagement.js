@@ -19,6 +19,8 @@ const UserManagement = () => {
 
   const { registration, userLogout, tiles } = visible;
 
+  const [hover, setHover] = useState(false);
+
   const handleShowRegistration = () => {
     setVisible({
       ...visible,
@@ -46,6 +48,15 @@ const UserManagement = () => {
     });
   };
 
+
+  const handleHover = () => {
+    setHover(true);
+  }
+
+  const handleMouseLeave = () => {
+    setHover(false);
+  }
+
   return (
     <div className='user-management'>
       <h1 className='user-management-header'>
@@ -58,11 +69,13 @@ const UserManagement = () => {
         <div className='user-management-tiles'>
           <Tile
             title='Register a Seller'
-            titleClassname='user-management-tiles-item-title'
+            titleClassname={`user-management-tiles-item-title`}
             className='user-management-tiles-box'
             onClick={handleShowRegistration}
             iconClassname='users-icon'
             icon
+            onMouseOver={() => handleHover()}
+            onMouseLeave={() => handleMouseLeave()}
           >
             <FontAwesomeIcon className='users-icon' icon={faUsers} />
           </Tile>

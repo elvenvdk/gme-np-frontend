@@ -14,6 +14,8 @@ const GoalSettings = () => {
     salesGoal: 0,
   });
 
+
+
   const { salesGoal } = goals;
 
   const [message, setMessage] = useState({
@@ -81,6 +83,8 @@ const GoalSettings = () => {
     }
   };
 
+
+
   return (
     <div className='goalsettings'>
       <h1 className='goalsettings-header'>Goal Settings</h1>
@@ -88,7 +92,7 @@ const GoalSettings = () => {
         <Tile 
           className='goalsettings-tiles-goal' 
           titleClassname='goalsettings-tiles-goal-title' 
-          title='Sales Goal' 
+          title='Sales Goal'
           child
         >
           <input

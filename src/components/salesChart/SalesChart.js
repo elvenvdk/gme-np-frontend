@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { VictoryChart, VictoryTheme, VictoryBar, VictoryAxis } from 'victory';
 import moment from 'moment';
 
@@ -18,7 +19,7 @@ const SalesChart = ({ hideChart }) => {
       const res = await api.getSales();
       for (let el of res.salesData) {
         salesArr.push({
-          date: moment(el.date).format('MMM Do YY'),
+          date: moment(el.date).format('MMM Do'),
           totals: parseInt(el.totals, 10),
         });
       }
@@ -35,6 +36,10 @@ const SalesChart = ({ hideChart }) => {
     getSales();
   }, []);
 
+  console.log({salesData});
+  if (!salesData.length) return(<> <h3 className='no-sales-yet'>NO SALES YET</h3> <p className='return-to-goals hide' role='p' onClick={() => hideChart()}>
+  Click here to return to Goals
+</p></>)
   return (
     <div className='sales-chart'>
       <h2 className='sales-chart-title'>Sales Data</h2>
@@ -44,17 +49,18 @@ const SalesChart = ({ hideChart }) => {
       <VictoryChart theme={VictoryTheme.material} domainPadding={20}>
         <VictoryAxis
           tickFormat={(y) => y}
-          style={{ tickLabels: { fontSize: 10 } }}
+          style={{ tickLabels: { fontSize: 7 } }}
         />
         <VictoryAxis
           dependentAxis
           tickFormat={(x) => `$${x}`}
-          style={{ tickLabels: { fontSize: 10 } }}
+          style={{ tickLabels: { fontSize: 7 } }}
         />
         <VictoryBar
           data={salesData}
           x='date'
           y='totals'
+          barWidth={salesData.length < 3 ? 20 : 10}
           style={{ data: { fill: '#2D9FD1' } }}
         />
       </VictoryChart>

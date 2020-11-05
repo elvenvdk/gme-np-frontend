@@ -66,6 +66,25 @@
       margin: 1.2rem 0;
     }
 
+    .register-btn {
+      background-color: #c24127;
+      color: #f4efe7;
+      cursor: pointer;
+      border: none;
+    }
+
+    .submit {
+      background-color: #c24127;
+      color: #f4efe7;
+      cursor: pointer;
+      border: none;
+    }
+
+    .register-btn:hover,
+    .submit:hover {
+      background-color: #f06260;
+    }
+
     &-checkbox-group {
       position: relative;
       display: flex;
@@ -82,5 +101,9 @@
         }
       }
     }
+  }
+
+  .back-btn-link:hover {
+    color: #f06260;
   }
 }

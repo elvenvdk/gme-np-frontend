@@ -13,7 +13,7 @@ const Nav = () => {
     <div className='nav'>
       <Menu />
       <h4 className='nav-company-name'>{api.getStorage.orgName()}</h4>
-      <FontAwesomeIcon className='nav-user-icon' icon={faUser} />
+      {/* <FontAwesomeIcon className='nav-user-icon' icon={faUser} /> */}
     </div>
   );
 };
